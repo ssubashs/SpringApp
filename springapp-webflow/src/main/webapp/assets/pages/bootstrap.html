@@ -1,0 +1,311 @@
+<html>
+<head>
+    <title>Index html</title>   
+    <link href="../css/bootstrap.min.css" rel="stylesheet"  media="screen" />
+    <style type="text/css" >
+
+      body { padding-top: 80px;}
+    
+	</style>
+
+
+</head>
+<body>
+<div class="container-fluid">
+
+			<div th:fragment="searchbar">
+				<div class="navbar navbar-inverse navbar-fixed-top">
+				  <div class="navbar-inner">
+					<div class="container-fluid">
+						<div id="searchbar" class="row" style="padding-top: 20px; padding-left: 20px">
+							<a id="home" class="brand" href="#">Backbone.js demo</a>							
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>	
+			<div class="row">	
+				<div >
+					<div class="span2 well">
+						<a href="#/new" class="btn btn-large btn-primary render-partial">Add User</a>
+						<div id="tagsAll" >
+							<h4 style="padding-top: 20px">Roles
+							<a href="#/refresh" class="icon-refresh"></a>
+								</h4>
+							<ul class="nav nav-pills nav-stacked" id="rolesAll">
+							// template here
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div  id="pageContent">
+					<div class="span10" id="content">
+						
+					</div>
+				</div>	
+			</div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<!-- <script type="text/javascript" src="../js/json2.js"></script>  -->
+<!-- <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script> -->
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/underscore.js"></script>
+<script type="text/javascript" src="../js/backbone.js"></script>
+<!-- <script type="text/javascript" src="../js/backbone.localStorage.js"></script> -->
+<script id="_rolesTemplate" type="text/template">
+	<%_.each(roles,function(role,key,list){%>
+ 	  <li ><a class="render-partial" href="#"><%= role.roletype%></a></li>	      
+ 	  <% })%>
+ </script>
+
+ <script id="rolesTemplate" type="text/template">
+	<%_.each(allRoles,function(role){%>
+ 	  <li ><a class="render-partial" href="#"><%= role%></a></li>	      
+ 	  <% })%>
+ </script>
+
+<script type="text/template" id="user-list-template">	
+     <table class="table striped">
+      <thead>
+        <tr>
+          <th>First Name</th><th>Last Name</th><th>User Name</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(users, function(user) { %>
+          <tr>          	
+            <td><%= user.firstname %></td>
+            <td><%= user.lastname %></td>
+            <td><%= user.username %></td>         
+            <td><a class="btn" href="#/edit/<%= user.id %>">Edit</a></td>   
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </script>
+
+   <script type="text/template" id="edit-user-template">
+    <form class="edit-user-form" id="userform" method="POST">
+      <legend><%= user ? 'Edit' : 'New' %> User</legend>
+        <label>First Name</label>
+        <input name="firstname" type="text" value="<%= user ? user.get('firstname') : '' %>">
+        <label>Last Name</label>
+        <input name="lastname" type="text" value="<%= user ? user.get('lastname') : '' %>">
+        <label>User Name</label>
+        <input name="username" type="text" value="<%= user ? user.get('username') : '' %>">
+        <hr />
+       <button type="submit" class="btn" ><%= user ? 'Update' : 'Create' %></button>
+       <% if(user) { %>
+        <input type="hidden" name="id" value="<%= user.id %>" />
+       <button data-user-id="<%= user.id %>" class="btn btn-danger delete">Delete</button>
+       <% }; %>
+    </form>
+  </script>
+
+
+ <script type="text/javascript">
+
+ 	 $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+      //options.url = 'http://localhost:8080/springapp/api' + options.url;
+ 		options.url = '/springapp/api' + options.url;
+    });
+
+ 	  $.fn.serializeObject = function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+    };
+
+
+ 	 var Users  = Backbone.Collection.extend({
+ 	 	url:'/customerRepo'
+ 	 });
+
+ 	 var Roles = Backbone.Collection.extend({
+ 	 	url:'/roleRepo/search/allRoles'
+ 	 });
+
+ 	 var User  = Backbone.Model.extend({
+ 	 	urlRoot:'/customerRepo'
+ 	 });
+
+ 	 var Router = Backbone.Router.extend({
+ 			routes:{
+ 				"":"home",
+ 				"new":"addUser",
+ 				"edit/:id": "addUser",
+ 				"refresh":"rolesRefresh"
+ 			}
+
+ 		});
+
+ 	 var router = new Router();
+
+
+ 	 var RoleList = Backbone.View.extend({
+ 	 	el:'#rolesAll', 
+ 	 	events: {        	
+        	'click .icon-refresh': 'refresh'
+    	}, 			 	
+ 	 	render:function(){
+
+ 	 		var that = this;
+ 			var roles = new Roles();
+ 			roles.fetch({
+ 				success:function(){
+ 					console.log(roles.models[0].get('content'));
+ 					var template = _.template($('#rolesTemplate').html(), {allRoles: roles.models[0].get('content')});
+            		that.$el.html(template); 
+ 				}
+ 			});
+ 	 	}
+
+ 	 });
+
+
+ 	var UserList = Backbone.View.extend({
+ 		el:'#content',
+ 		events: {        	
+        	'click .icon-refresh': 'refresh'
+    	},
+ 		render:function(){
+ 			var that = this;
+ 			var users = new Users();
+ 			users.fetch({
+ 				success: function(){
+ 					console.log(JSON.stringify(users.models[0].get('content')));
+ 					for(var j = 0; j < users.models[0].get('content').length ;j++ )
+ 					{
+ 						var temp = users.models[0].get('content')[j].links; 					
+	 					console.log(temp);
+	 					var selfurl;
+	 					for(var i=0;i<temp.length;i++)
+	 					{
+	 						var templink = temp[i];
+	 						console.log(templink);
+	 						if(templink.rel=='self')
+	 						{
+	 							selfurl = templink.href;
+	 						}
+	 					}
+	 					console.log('self url is '+ selfurl);
+	 					users.models[0].get('content')[j].url = selfurl;
+	 					var a = selfurl.split('/');
+	 					var id = a[a.length-1];	 					
+	 					console.log('id is ' +id);
+	 					users.models[0].get('content')[j].id = id;
+
+ 					}
+ 					
+ 					var template = _.template($('#user-list-template').html(), {users: users.models[0].get('content')});
+            		that.$el.html(template); 					
+ 				}
+
+ 			})
+ 			
+ 		}
+ 	});
+
+ 	var EditUser = Backbone.View.extend({
+ 		el:'#content', 		
+ 		events: {
+        	"submit #userform": "saveuser",
+        	'click .delete': 'deleteUser'
+    	},
+ 		render:function(options){
+ 			var that = this;
+ 			console.log(options);
+ 			if(options.id) {
+	          that.user = new User({id: options.id});
+	          that.user.fetch({
+	            success: function (user) {    
+	              var template = _.template($('#edit-user-template').html(), {user: user});
+	              that.$el.html(template);
+	            }
+	          })
+	        } else {
+	         var template = _.template($('#edit-user-template').html(),{user: null});
+        		that.$el.html(template); 	
+	        }
+
+ 			
+ 			
+ 			
+ 		},
+ 		saveuser: function (ev) {	
+ 		       
+	        console.log("submit");
+	         var userDetails = $(ev.currentTarget).serializeObject();
+	         console.log(userDetails);
+	          var user = new User();
+		        user.save(userDetails, {
+		          success: function () {
+		            router.navigate('', {trigger:true});
+
+          			}
+    			});		       
+    		return false;		
+    		},
+
+    	deleteUser: function (ev) {
+		        this.user.destroy({
+		          success: function () {
+		            console.log('destroyed');
+		            router.navigate('', {trigger:true});
+		          }
+		        });
+		        return false;
+      		},	
+ 		});
+
+
+ 		
+
+ 		var userList = new UserList();
+ 		var editUser = new EditUser();
+ 		var roleList = new RoleList();
+ 		
+ 		router.on('route:home',function(){
+ 			console.log('home event triggered ');
+ 			userList.render();
+ 			roleList.render();
+ 		});
+
+ 		router.on('route:addUser',function(id){
+ 			console.log('Add/Edit invoked - show user form'); 
+ 			editUser.render({id: id});			
+ 		});
+
+ 		router.on('route:rolesRefresh',function()
+ 		{
+ 			roleList.render();
+ 		});
+
+ 		Backbone.history.start();
+ 
+   
+	$(document).ready(function($){
+		     var rolesJson = {roles:[{roletype:"Admin"},{roletype:"User"},{roletype:"Agents"},{roletype:"Customers"}]},
+		          parsedTemplate = "",
+		          templateText = $('#_rolesTemplate').html(),
+		          roleTemplate = _.template(templateText);			    
+		         parsedTemplate = roleTemplate(rolesJson);		        
+		         $("#rolesAll").html(parsedTemplate);
+
+		    });
+		
+    </script>
+
+</body>
+</html>

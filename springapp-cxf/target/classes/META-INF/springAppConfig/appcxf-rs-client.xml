@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/core 
+		http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxrs
+		http://cxf.apache.org/schemas/jaxrs.xsd">
+		
+    <bean id="jsonProvider" 
+		class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	
+	<jaxrs:client id="customerService" serviceClass="com.app.cxfrs.defs.ICustomerServ" address="http://localhost:8080/springapp/api/">		
+
+		<jaxrs:providers>
+			<ref bean="jsonProvider"/> 
+		</jaxrs:providers>
+		<jaxrs:headers>
+			<entry key="Accept" value="application/json"/>			
+		</jaxrs:headers>
+
+	 	<!-- 
+			<jaxrs:inInterceptors>
+	            <bean class="com.app.cxfrs.impls.CustomInboundInterceptor"/>            
+	        </jaxrs:inInterceptors>
+	        
+			<jaxrs:outInterceptors>
+	            <bean class="com.app.cxfrs.impls.CustomOutboundInterceptor"/>            
+	        </jaxrs:outInterceptors>
+	        
+			<jaxrs:invoker>
+	   				<bean class="com.app.cxfrs.impls.CustomJAXRSInvoker"/>
+	 		</jaxrs:invoker>
+      	-->
+	</jaxrs:client>
+
+</beans>

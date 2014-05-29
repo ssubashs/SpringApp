@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!--
+    <http auto-config="true" >
+         <intercept-url pattern="/assets/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>           
+        <intercept-url pattern="/applogin/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/applogout/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/**" access="ROLE_USER"/>               
+        <form-login login-page="/applogin" 
+            login-processing-url="/applogin/process"
+			username-parameter="Username"
+			password-parameter="Password"
+			authentication-failure-url="/applogin?redirect=authfailed"/>
+        <logout logout-url="/applogout" 
+			invalidate-session="true" success-handler-ref="logoutSuccessHandler"
+            delete-cookies="true"/>
+         
+    </http>
+     
+    <http auto-config='true'>
+	    <intercept-url pattern="/notsecured/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	    <intercept-url pattern="/secured/**" access="ROLE_USER, ROLE_ADMIN" />
+	    <http-basic />
+	</http>
+	
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user1@example.com"
+                        password="user1"
+                        authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+     -->
+     
+     <http pattern="/assets/**" security="none" />
+     
+      <http auto-config="true" use-expressions="true">                  
+        <intercept-url pattern="/applogin/**" access="permitAll"/>
+        <intercept-url pattern="/applogout" access="permitAll"/>
+        <intercept-url pattern="/denied" access="permitAll"/>
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>       
+        <intercept-url pattern="/user" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>        
+        <form-login login-page="/applogin" 
+             login-processing-url="/applogin/process"
+            default-target-url="/dashboard"
+			username-parameter="Username"
+			password-parameter="Password"
+			authentication-failure-url="/applogin?redirect=authfailed"/>
+        
+        <access-denied-handler error-page="/denied"/>
+        <logout logout-url="/applogout" 
+			invalidate-session="true" success-handler-ref="logoutSuccessHandler"
+            delete-cookies="true"/>
+         
+    </http>
+     
+     <authentication-manager alias="authenticationManager">
+    	<authentication-provider user-service-ref="customUserDetailsService">
+    		<!-- <password-encoder hash="md5"/> -->    
+    	</authentication-provider>
+	</authentication-manager>
+    
+    <bean:bean id="logoutSuccessHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+	    <!-- <bean:property name="useReferer" value="true"/>  -->
+	    <bean:property name="defaultTargetUrl" value="/applogin?redirect=logout"/>
+	 </bean:bean>
+    
+</bean:beans>
