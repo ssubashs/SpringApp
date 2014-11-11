@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index html</title>   
+    <link href="../../../../assets/css/bootstrap.min.css" rel="stylesheet"  media="screen" />
+    <style type="text/css" >
+
+      body { padding-top: 80px;}
+    
+	</style>
+
+
+</head>
+<body>
+<div class="container-fluid">				
+			<div class="row">	
+				<div th:fragment="menu">
+					<div class="span2 well">
+						<form method="post" action= "#" accept-charset="utf-8" th:action="@{/app/customer/add}" >
+							<input type="hidden" name="_flowId" value="flow" />
+							<input value="Add User" type="submit" name="_eventId_addUser" class="btn btn-large btn-primary render-partial" />
+						</form>
+						<div id="tagsAll" >
+							<h4 style="padding-top: 20px">Roles
+							<a href="#" class="icon-refresh" id="refresh" onclick="reloadRoles();"></a>
+								</h4>
+							<ul class="nav nav-pills nav-stacked" id="rolesAll">
+							  
+								  
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div  id="pageContent">
+					<div class="span10" id="content">
+						
+					</div>
+				</div>	
+			</div>
+</div>
+<script type="text/javascript" src="../../../../assets/js/jquery-1.8.3.min.js"></script>
+
+
+ <script type="text/javascript"  th:fragment="menuScript">
+/*<![CDATA[*/ 
+	$(document).ready(function($){
+		     console.log('loaded menu scripts...');
+		 
+		    	reloadRoles();
+			
+		    });
+		    
+		    function reloadRoles()
+		    {
+		    	console.log("Reload roles");
+		    	 var url = /*[[@{/api/roleRepo/search/allRoles}]]*/;
+			     console.log('base url'+url);
+			 
+					
+				 $.ajax({ // ajax call starts
+			          url: url, // JQuery loads data
+			          //data: 'button=' + $(this).val(), // Send value of the clicked button
+			          dataType: 'json', // Choosing a JSON datatype
+			          success: function(data) // Variable data contains the data we get from serverside
+			          {
+			        	  console.log('data array' + data.content);
+			        	
+			        	var customerlink = /*[[@{/app/customer/role/}]]*/;
+			        	$('#rolesAll').html('');
+			        	  for (var i in data.content) {
+		                      $('#rolesAll').append('<li><a class="render-partial" href="'+customerlink + data.content[i]+ '">' + data.content[i] + '</a></li>');
+		                  }
+
+			          }
+					
+				 });
+		    }
+	/*]]>*/
+    </script>
+
+
+</body>
+</html>

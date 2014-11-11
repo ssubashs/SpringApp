@@ -27,7 +27,7 @@
 		<commons.digester.version>2.1</commons.digester.version>
   		<commons.collections.version>3.2.1</commons.collections.version> 
   		<slf4j.version>1.6.1</slf4j.version>
-  		<aspectj.version>1.6.10</aspectj.version>
+  		<aspectj.version>1.8.1</aspectj.version>
 	</properties>
 	
   <dependencies>
@@ -451,9 +451,14 @@
                 <type>jar</type>
                 <scope>compile</scope>
         </dependency>
-	    
-	    
-    </dependencies>
+
+    	<dependency>
+        		<groupId>org.springframework.webflow</groupId>
+        		<artifactId>spring-webflow</artifactId>
+        		<version>2.3.2.RELEASE</version>
+    	</dependency>
+    	
+  </dependencies>
 	<repositories>
 		<repository>
 			<id>central</id>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index html</title>  
+    <link href="../../../assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet"  media="screen" />
+    <style type="text/css" >
+      body { padding-top: 80px;}
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div th:include="customer/common/header :: header"> </div>	
+		<div class="row">
+			<div th:include="customer/common/menu :: menu">	</div>
+			<div  id="pageContent">
+				<div class="span4" id="content" th:object="${person}">
+					<legend> Customer Data </legend>
+					<table class="table striped">
+						<tr>
+							<th> First Name </th>
+							<th th:text="*{firstname}" />
+						</tr>
+						<tr>
+							<th> Last Name </th>
+							<th th:text="*{lastname}" />
+						</tr>
+						<tr>
+							<th> User Name </th>
+							<th th:text="*{username}" />
+						</tr>
+					</table> 						        	
+				</div>	
+				<div class="span4" id="content" th:object="${contact}">
+					<legend> Contact Details </legend>
+					<table class="table striped">
+						<tr>
+							<th> Address Line 1 </th> <th th:text="*{addline1}" />
+						</tr>
+						<tr>
+							<th> Address Line 2 </th> <th th:text="*{addline2}" />
+						</tr>
+						<tr>
+							<th> City </th> <th th:text="*{city}" />
+						</tr>
+						<tr>
+							<th> State </th> <th th:text="*{state}" />
+						</tr>
+						<tr>
+							<th> Pin Code </th> <th th:text="*{zip}" />
+						</tr>
+						<tr>
+							<th> Email </th> <th th:text="*{email}" />
+						</tr>
+						<tr>
+							<th> Home Phone </th> <th th:text="*{hphone}" />
+						</tr>
+						<tr>
+							<th> Mobile Phone </th> <th th:text="*{mphone}" />
+						</tr>
+						<tr>
+							<th> Work Phone </th> <th th:text="*{wphone}" />
+						</tr>
+					</table>
+				</div>
+				<div class="span4" id="content">
+				<!-- 
+					<form th:object="${userrole}" method="post">		       
+				-->
+					<form action="#" th:action="@{/app/customer/addUserrole}" th:object="${userrole}" method="post">
+					    <legend> Role Details </legend>
+					    <label> Role cd </label> <input type="text" th:field="*{rolecd}"/>
+					    <label> Status </label> <input type="text" th:field="*{status}"/>
+						<hr />
+						<input type="submit" name="_eventId_submit" value="Submit" />	
+					</form>						          						        	
+				</div>
+			</div>	
+		</div>
+	</div>
+	<script type="text/javascript" src="../../../assets/js/jquery-1.8.3.min.js" th:src="@{/assets/js/jquery-1.8.3.min.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function($){
+		     console.log('loaded customer add/edit document');
+		    });	
+    </script>
+</body>
+</html>

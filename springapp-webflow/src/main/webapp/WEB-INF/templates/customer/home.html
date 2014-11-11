@@ -39,8 +39,8 @@
 							            <td th:text="${customer.firstname}">userfn</td>
 							            <td th:text="${customer.lastname}">userln</td>
 							            <td th:text="${customer.username}">username</td>         
-							            <td><a class="btn" href="#">Edit</a></td>   
-							          </tr>								          						        
+							            <td><a class="btn" href="#" th:href="@{/app/customer/editPerson/}+${customer.personid}">Edit</a></td>   
+							          </tr>
 							      </tbody>
 							    </table>
 					</div>

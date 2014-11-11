@@ -2,17 +2,61 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/webflow-config
+		http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
  
-	 <mvc:resources mapping="/assets/**" location="/assets/"/>
+	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	
-	<bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+	<!-- Web Flow -->
+		
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+    	<property name="flowRegistry" ref="flowRegistry" />
+    	<property name="order" value="0" />
+	</bean>
+	
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+	
+	<webflow:flow-executor id="flowExecutor" />
+	
+	<!-- to enable dispatching request to mapped controller class -->
+  	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	
+	<!-- The registry of executable flow definitions -->
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/templates/" >
+    	<webflow:flow-location id="customer/flow" path="customer/flow.xml" />
+	</webflow:flow-registry>
+	
+
+	
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
+
+ 	<!-- Use the existing view resolver -->
+ 	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator" >
+ 		<property name="viewResolvers">  
+			<list>
+				<ref bean="thymeLeafViewResolver"/>
+				<ref bean="freeMarkerViewResolver"/>
+				<ref bean="viewResolver"/>
+			</list>  
+		</property>
+ 	</bean>
+ 	
+ 	<!-- End of webflow config -->
+	
+	<bean id="thymeLeafViewResolver" class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
 	  <property name="templateEngine" ref="templateEngine" />
 	  <property name="order" value="1" />	  
 	 <!-- 
@@ -53,7 +97,7 @@
 
 	</bean>
 	
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+	<bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 	    <property name="order" value="2" />
 	    <property name="cache" value="false"/>
 	    <property name="prefix" value=""/>
@@ -65,7 +109,7 @@
 	</bean>
 	
 		<!--  JSP view -->
-	<bean
+	<bean id="viewResolver"
 	   class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix">
@@ -76,5 +120,5 @@
 		</property>
 		<property name="order" value="3" />
 	</bean>
- 
+	
 </beans>

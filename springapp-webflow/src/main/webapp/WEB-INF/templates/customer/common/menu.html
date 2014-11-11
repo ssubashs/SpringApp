@@ -16,7 +16,10 @@
 			<div class="row">	
 				<div th:fragment="menu">
 					<div class="span2 well">
-						<a href="../add.html" th:href="@{customer/add}" class="btn btn-large btn-primary render-partial">Add User</a>
+						<form method="post" action= "#" accept-charset="utf-8" th:action="@{/app/customer/add}" >
+							<input type="hidden" name="_flowId" value="flow" />
+							<input value="Add User" type="submit" name="_eventId_addUser" class="btn btn-large btn-primary render-partial" />
+						</form>
 						<div id="tagsAll" >
 							<h4 style="padding-top: 20px">Roles
 							<a href="#/refresh" class="icon-refresh"></a>
