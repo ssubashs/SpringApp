@@ -65,9 +65,10 @@
 				</div>
 				<div class="span4" id="content">
 				<!-- 
-					<form th:object="${userrole}" method="post">		       
+						<form action="#" th:action="@{/app/customer/addUserrole}" th:object="${userrole}" method="post">	       
 				-->
-					<form action="#" th:action="@{/app/customer/addUserrole}" th:object="${userrole}" method="post">
+				<form th:object="${userrole}" method="post">
+					
 					    <legend> Role Details </legend>
 					    <label> Role cd </label> <input type="text" th:field="*{rolecd}"/>
 					    <label> Status </label> <input type="text" th:field="*{status}"/>

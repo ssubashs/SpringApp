@@ -59,7 +59,7 @@
 
 	<!-- ******************************************************************** -->
 	<!-- PropertyConfigurer for the DAO -->	 
-	<context:property-placeholder location="classpath:application-dao-h2.properties"/> 
+	<context:property-placeholder location="classpath:application-dao.properties"/> 
 	
 	<!-- Using Apache DBCP Data Sources -->
 	 

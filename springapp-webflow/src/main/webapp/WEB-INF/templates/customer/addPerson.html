@@ -16,10 +16,10 @@
 			<div  id="pageContent">
 				<div class="span10" id="content">
 					<!-- 													       
-			         <form th:object="${person}" method="POST">
+			          <form action="#" th:action="@{/app/customer/addPerson}" th:object="${person}" method="POST">
 			         -->
-			         
-			         <form action="#" th:action="@{/app/customer/addPerson}" th:object="${person}" method="POST">
+			         <form th:object="${person}" method="POST">
+			        
 					      <legend> Customer Data </legend>
 					      <label>First Name</label> <input type="text" th:field="*{firstname}"/>
 					      <label>Last Name</label>  <input type="text" th:field="*{lastname}"/>

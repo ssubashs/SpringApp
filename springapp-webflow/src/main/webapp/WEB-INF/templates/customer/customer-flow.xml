@@ -18,6 +18,13 @@
 		<transition to="addPerson" on="addUser"></transition>
 	</view-state>
 	
+	<view-state id="viewRole" view="customer/something">		
+		<on-render>
+			<evaluate expression="flowService.getRoles()" result="flowScope.roles"></evaluate>
+			<evaluate expression="flowService.getCustomers(flowRequestContext)" result="flowScope.customers"></evaluate>
+		</on-render>		
+	</view-state>
+	
 	<view-state id="addPerson" view="customer/addPerson" model="person">
 		<transition to="addContact" on="submit"></transition>
 		<on-exit>

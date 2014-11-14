@@ -33,9 +33,10 @@
 				</div>
 				<div class="span4" id="content">
 				<!-- 
-					<form th:object="${contact}" method="post">
+					<form action="#" th:action="@{/app/customer/addContact}" th:object="${contact}" method="post">
 				 -->
-				 <form action="#" th:action="@{/app/customer/addContact}" th:object="${contact}" method="post">
+				 <form th:object="${contact}" method="post">
+				 
 				 	
 						<legend> Contact Details </legend>
 						<label> Address Line 1 </label> <input type="text" th:field="*{addline1}"/>

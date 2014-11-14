@@ -19,41 +19,38 @@
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	
 	<!-- Web Flow -->
+	
+		
+	<!-- The registry of executable flow definitions -->
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/templates/" >
+    	<webflow:flow-location id="customer/flow" path="customer/customer-flow.xml" />
+	</webflow:flow-registry>
+	
+	<webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry" >
+	</webflow:flow-executor>
+	
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
+	
+	<!-- Use the existing view resolver -->
+ 	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator" >
+ 		<property name="viewResolvers">  
+			<list>
+				<ref bean="thymeLeafViewResolver"/>
+			</list>  
+		</property>
+ 	</bean>
+ 	
+ 	
+ 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
 		
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
     	<property name="flowRegistry" ref="flowRegistry" />
     	<property name="order" value="0" />
 	</bean>
 	
-	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-		<property name="flowExecutor" ref="flowExecutor" />
-	</bean>
 	
-	<webflow:flow-executor id="flowExecutor" />
-	
-	<!-- to enable dispatching request to mapped controller class -->
-  	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
-	
-	<!-- The registry of executable flow definitions -->
-	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/templates/" >
-    	<webflow:flow-location id="customer/flow" path="customer/flow.xml" />
-	</webflow:flow-registry>
-	
-
-	
-	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
-
- 	<!-- Use the existing view resolver -->
- 	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator" >
- 		<property name="viewResolvers">  
-			<list>
-				<ref bean="thymeLeafViewResolver"/>
-				<ref bean="freeMarkerViewResolver"/>
-				<ref bean="viewResolver"/>
-			</list>  
-		</property>
- 	</bean>
- 	
  	<!-- End of webflow config -->
 	
 	<bean id="thymeLeafViewResolver" class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
@@ -76,49 +73,5 @@
 	  <property name="templateResolver" ref="templateResolver" />
 	</bean>
 	
-	<!--  Freemarker config -->
-	
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<!-- <property name="templateLoaderPath" value="/WEB-INF/views/"/> -->
-		<property name="templateLoaderPaths">
-			<list>
-				<value>classpath:/ftls/</value>				
-				<value>/WEB-INF/ftls/</value>
-			</list>
-		</property>
-
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="auto_import">spring.ftl as spring</prop>
-			</props>
-		</property>
-		<property name="preferFileSystemAccess" value="false" />
-
-	</bean>
-	
-	<bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-	    <property name="order" value="2" />
-	    <property name="cache" value="false"/>
-	    <property name="prefix" value=""/>
-	    <property name="suffix" value=".ftl"/>	
-	    <property name="exposeSpringMacroHelpers" value="true"/>
-	    <property name="exposeSessionAttributes" value="true"/>
-        <property name="exposeRequestAttributes" value="true"/>  
-        <property name="allowRequestOverride" value="true"/>
-	</bean>
-	
-		<!--  JSP view -->
-	<bean id="viewResolver"
-	   class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix">
-			<value>/pages/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-		<property name="order" value="3" />
-	</bean>
 	
 </beans>

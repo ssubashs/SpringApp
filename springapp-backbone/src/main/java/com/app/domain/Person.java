@@ -31,7 +31,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  */
 @Entity
-@NamedQuery(name="person.findAll", query="SELECT person FROM Person person")
+@NamedQuery(name="person.findAll", query="SELECT aperson FROM Person aperson")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 

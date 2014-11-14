@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MediatorController {
 	
 	Logger log = LoggerFactory.getLogger(MediatorController.class);	
-//	@RequestMapping(value = "/")
-//	public String defaultRequest(Model model)
-//	{
-//		System.out.println("default mediator controller ");
-//		return "redirect:/test";
-//	}
+	@RequestMapping(value = "/")
+	public String defaultRequest(Model model)
+	{
+		System.out.println("default mediator controller ");
+		return "redirect:/app/customer/flow";
+	}
 	
 	@RequestMapping("/test")
 	public String testRequest(Model model)
