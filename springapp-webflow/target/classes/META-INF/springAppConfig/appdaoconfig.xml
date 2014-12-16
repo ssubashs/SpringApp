@@ -3,8 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -18,8 +17,6 @@
 	   http://www.springframework.org/schema/jee/spring-jee.xsd	   
 	   http://www.springframework.org/schema/lang
 	   http://www.springframework.org/schema/lang/spring-lang.xsd
-	   http://www.springframework.org/schema/security 
-	   http://www.springframework.org/schema/security/spring-security.xsd
 	   http://www.springframework.org/schema/data/jpa
    	   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
    	   http://www.springframework.org/schema/util 
@@ -40,7 +37,7 @@
 	<!-- Configure the Spring framework to use jpa transaction manager -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="defaultEMF" />		
+		<property name="entityManagerFactory" ref="entityManagerFactory" />		
 	</bean>
 	
 	<!-- ******************************************************************** -->
@@ -59,7 +56,7 @@
 
 	<!-- ******************************************************************** -->
 	<!-- PropertyConfigurer for the DAO -->	 
-	<context:property-placeholder location="classpath:application-dao-h2.properties"/> 
+	<context:property-placeholder location="classpath:application-dao.properties"/> 
 	
 	<!-- Using Apache DBCP Data Sources -->
 	 
@@ -94,7 +91,7 @@
 	<!-- EntityManager Factory that brings together the persistence unit, datasource, 
 		and JPA Vendor -->
 	<!-- -->
-	<bean id="defaultEMF"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		 <property name="dataSource" ref="defaultDS" />
       <property name="packagesToScan" value="com.app.domain" />

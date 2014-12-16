@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- jQuery (necessary to load navigation and includes) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+          $('body').prepend('<nav></nav>');
+          $('nav').load('nav.html');
+          $('body').append('<footer></footer>');
+          $('footer').load('footer.html');
+          $("head").load("head.html");
+      });
+
+    </script>
+  </head>
+  <body>
+    <!-- page content -->
+    <div class="container-fluid page-wrapper" id="appointment">
+      <div class="row">
+        <div class="col-sm-12 page-header">
+          <h2 class="title">Schedule Appointment</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class='col-sm-6'>
+          <div class="form-group clearfix">
+            <label class="col-xs-2 control-label" for="assign">Start:</label>
+            <div class="col-xs-10">
+              <div class='input-group date' id='task-start'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <label class="col-xs-2 control-label" for="assign">End:</label>
+            <div class="col-xs-10">
+              <div class='input-group date' id='task-end'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="assign">Assign To:</label>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-md-6">
+                  <select class="form-control" name="assign" id="assign">
+                    <option>James NM Kirk (Agent 16-03-20)</option>
+                    <option>Terry Staff</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <button type="button" class= "btn btn-info">Check Availability</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2 checkbox">
+              <label>
+                <input type="checkbox" id="chechbox1"> Notify Assign To?
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- start/Additional Options -->
+      <div class="form-group clearfix">
+        <div class="col-md-12">
+          <a><label data-toggle="collapse" data-parent="" data-target="#addtl-search-options">
+              <i class="fa fa-sm fa-fw fa-chevron-right"></i> Additional Options
+            </label></a>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <div class="collapse col-md-12" id="addtl-search-options">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Status" class="control-label">
+                  Status:
+                </label>
+                <select name="Status" id="Status" class="form-control">
+                  <option value="AR">(Select)</option>
+                  <option value="CA">Busy</option>
+                  <option value="IA">Available</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Remindme" class="control-label">
+                  Remind Me:
+                </label>
+                <select name="Remindme" id="Remindme" class="form-control">
+                  <option value="IR">(Select)</option>
+                  <option value="TA">10 min</option>
+                  <option value="NA">30 min</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Classification" class="control-label">
+                  Classification:
+                </label>
+                <select name="Classification" id="Classification" class="form-control">
+                  <option value="PR">(Select)</option>
+                  <option value="NR">Normal</option>
+                  <option value="IM">Important</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Priority" class="control-label">
+                  Priority:
+                </label>
+                <select name="Priority" id="Priority" class="form-control">
+                  <option value="LR">(Select)</option>
+                  <option value="MR">Normal</option>
+                  <option value="LM">Important</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Priority" class="control-label">
+                  Show Time As:
+                </label>
+                <select name="Showtime" id="Showtime" class="form-control">
+                  <option value="UR">(Select)</option>
+                  <option value="BZ">Busy</option>
+                  <option value="AV">Available</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="Priority" class="control-label">
+                  Category:
+                </label>
+                <select name="Category" id="Category" class="form-control">
+                  <option value="KR">(Select)</option>
+                  <option value="FR">FFR</option>
+                  <option value="CM">CMR</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end/Additional Options -->
+      <div class="row">
+        <div class='col-sm-12'>
+          <div class="form-group clearfix">
+            <label class="col-sm-1 control-label" for="cvv">Subject:</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Subject">
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <label class="col-sm-1 control-label" for="location">Location:</label>
+            <div class="col-sm-4">
+              <select class="form-control" id="location" name="location">
+                <option>(select)</option>
+                <option>Iowa</option>
+                <option>Califonia</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <div class="col-md-12">
+          <div class="row clearfix">
+            <label class="col-sm-2 control-label" for="message">Note: </label>
+          </div>
+          <div class="form-group clearfix">
+            <div class="col-md-12">
+              <textarea id="message" name="phone" class="form-control" rows="12" required></textarea>
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <div class="col-md-12">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="chechbox1"> Check to add this Apppointment as a comment.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- start/footer -->
+
+      <!-- Navbar fixed bottom -->
+      <div class="row"> 
+        <div class="col-md-12"> 
+          <div class="navbar-fixed-bottom sticky-menu"> 
+            <a href="manage-effr.html" class="btn btn-sm btn-default"><span class="fa fa-times fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Cancel </span></a>
+            <button type="button" class="btn btn-sm btn-link"><span class="fa fa-trash fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Clear </span></button> 
+            <a href="manage-effr.html" class="btn btn-danger pull-right"><span class="fa fa-save fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Save</span></a> 
+          </div> 
+        </div>
+      </div><!-- /.row -->
+    </div> <!-- /.page-wrapper -->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/bootstrap-multiselect.js"></script>
+    <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.min.js"></script>
+    <script src="../js/ecms.js"></script>
+    <!--<script>
+      javascript:(function () {
+          var s = document.createElement("script");
+          s.onload = function () {
+              bootlint.showLintReportForCurrentDocument([]);
+          };
+          s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+          document.body.appendChild(s)
+      })();
+    </script> -->
+    
+    <script>
+    $( document ).ready(function(){
+    $("#task-start").datetimepicker(
+			 {
+			
+				 autoclose: true,
+				 todayHighlight: true,
+				 startDate: new Date(),
+       		 onClose: function () { $(this).valid(); }
+			 }
+			
+		 );
+    $("#task-end").datetimepicker(
+			 {
+			
+				 autoclose: true,
+				 todayHighlight: true,
+				 startDate: new Date(),
+      		 onClose: function () { $(this).valid(); }
+			 }
+			
+		 ); 
+    }); 
+    </script>
+  </body>
+</html>

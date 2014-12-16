@@ -29,8 +29,8 @@
 
 	<mvc:annotation-driven />
 	
-	<import resource="appdaoconfig-embedded.xml"/> 
-	<import resource="apidataRest.xml"/>
+	<import resource="appdaoconfig.xml"/> 
+	
 	<!--  <import resource="appsecurity.xml"/> -->  
 	
 	 

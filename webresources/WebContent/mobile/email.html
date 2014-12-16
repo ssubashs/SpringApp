@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- jQuery (necessary to load navigation and includes) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+          $('body').prepend('<nav></nav>');
+          $('nav').load('nav.html');
+          $('body').append('<footer></footer>');
+          $('footer').load('footer.html');
+          $("head").load("head.html");
+      });
+
+    </script>
+  </head>
+  <body>
+    <!-- page content -->
+    <div class="container-fluid page-wrapper" id="email">
+      <div class="row">
+        <div class="col-sm-12 page-header">
+          <h2 class="title">e-Mail FFR</h2>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <div class="col-sm-12">
+          <div class="well well-sm">
+            <br/>
+            <div class="form-group clearfix">
+              <div class="col-sm-12 float-label-control">
+                <label for="from">From : </label>
+                <input type="email" class="form-control" value="James.Kirk@farmersagent.com" placeholder="" id="from">
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <div class="col-sm-12 float-label-control">
+                <label for="to">To : </label>
+                <input type="email" class="form-control" placeholder="" id="to">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> CC/BCC </a>
+              </div>
+            </div>
+            <div class="panel-group driving-license-settings" id="accordion">
+              <div id="collapseOne" class="panel-collapse collapse">
+                <div class="form-group clearfix">
+                  <div class="col-sm-12 float-label-control">
+                    <label for="cc">Cc : </label>
+                    <input type="email" class="form-control" placeholder="" id="cc">
+                  </div>
+                </div>
+                <div class="form-group clearfix">
+                  <div class="col-sm-12 float-label-control">
+                    <label for="bcc">Bcc : </label>
+                    <input type="email" class="form-control" placeholder="" id="bcc">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <div class="col-sm-12 float-label-control">
+                <label for="subject">Subject : </label>
+                <input type="text" class="form-control" placeholder="" id="subject">
+              </div>
+            </div>
+
+            <div class="form-group clearfix">
+              <div class="col-md-12">
+                <textarea id="message" name="phone" class="form-control"  rows="12" required></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted small">Attachment: <span class="fa fa-paperclip"></span> FFR-VIP Sam-Nov.10,2014 03.03 PM PT <a href="#">Remove</a></p>
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <div class="checkbox col-md-12 text-muted small">
+                <label>
+                  <input type="checkbox" id="chechbox1"> Do you want to save this Email as a comment and/or schedule a follow up?
+                </label>
+              </div>
+            </div>
+          </div><!-- /.well -->
+        </div>
+      </div><!-- /.row -->
+
+      <!-- Navbar fixed bottom -->
+      <div class="row"> 
+        <div class="col-md-12"> 
+          <div class="navbar-fixed-bottom sticky-menu"> 
+            <a href="manage-effr.html" class="btn btn-sm btn-default"><span class="fa fa-times fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Cancel </span></a> 
+            <button type="button" class="btn btn-sm btn-default"><span class="fa fa-check-square-o fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Spell Check</span></button> 
+            <button type="button" class="btn btn-sm btn-link"><span class="fa fa-trash fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Clear </span></button> 
+            <a href="manage-effr.html" class="btn btn-danger pull-right"><span class="fa fa-paper-plane fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Send</span></a> 
+          </div> 
+        </div>
+      </div><!-- /.row --><!-- /Navbar fixed bottom -->
+    </div><!-- /#page-content .container-fluid -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-multiselect.js"></script>
+    <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.min.js"></script>
+    <script src="js/ecms.js"></script>
+    <!--<script>
+    javascript:(function () {
+        var s = document.createElement("script");
+        s.onload = function () {
+            bootlint.showLintReportForCurrentDocument([]);
+        };
+        s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+        document.body.appendChild(s)
+    })();
+  </script> -->
+  </body>
+</html>

@@ -30,7 +30,7 @@
 	<mvc:annotation-driven />
 	
 	<import resource="appdaoconfig.xml"/> 
-	<import resource="apidataRest.xml"/>
+	
 	<!--  <import resource="appsecurity.xml"/> -->  
 	
 	 

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- jQuery (necessary to load navigation and includes) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+          $('body').prepend('<nav></nav>');
+          $('nav').load('nav.html');
+          $('body').append('<footer></footer>');
+          $('footer').load('footer.html');
+          $("head").load("head.html");
+      });
+
+    </script>
+  </head>
+  <body>
+    <!-- page content -->
+    <div class="container-fluid page-wrapper" id="manage-effr">
+      <form class="form-horizontal">
+        <section class="page-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2 class="title">Manage </h2>
+            </div>
+            <div class="col-sm-6 text-right account-name">
+              <h2><span class="small">John Arvizu Account</span> <img src="../images/lob_Grey_Auto.gif" alt="No active Farmers Auto policy"></h2>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="well well-sm">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label ">
+                      Last FFR: 
+                    </label>
+                    <span class="form-control-static"><a href="javascript:void(0)">Set Status and Date</a></span>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label ">
+                      Next FFR: 
+                    </label>
+                    <span class="form-control-static"><a href="schedule-appt.html">Schedule FFR</a></span>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label ">
+                      Last Viewed: 
+                    </label>
+                    <span class="form-control-static">Oct 28, 2014</span>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label">
+                      Last eFFR: 
+                    </label>
+                    <span class="form-control-static">Nov 6, 2014</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!--- /.row -->
+        </section>
+        <section>
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="row">
+                <h3 class="col-md-6 title">eFFR Checklist</h3>
+              </div>
+              <div class="well well-sm">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label">
+                      Account Status: 
+                    </label>
+                    <span class="form-control-static">x-Date</span>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label class="control-label">
+                      Lead Source: 
+                    </label>
+                    <span class="form-control-static">Direct contact / Claimant</span>
+                  </div>
+                </div>
+              </div>
+              <h4 class="text-center text-primary">Custom Preferred eFFR Questions</h4>
+              <div class="section-header subhead hidden-sm hidden-xs">
+                <div class="row">
+                  <div class="col-md-9">
+                    Questions
+                  </div>
+                  <div class="col-md-1">
+                    Yes
+                  </div>
+                  <div class="col-md-1">
+                    No
+                  </div>
+                  <div class="col-md-1">
+                    N/A
+                  </div>
+                </div>
+              </div>
+              <div class="rows-striped">
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Do you have any teenagers who are working on getting their drivers license?
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Do you have any Pets (dog, cat) that need to be insured?
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Are you signed up to electronically (ePolicy) have your payment deducted?
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+              </div> <!-- /.rows-striped -->
+              <h4 class="text-center text-primary">Standard eFFR Questions</h4>
+              <div class="section-header subhead hidden-sm hidden-xs">
+                <div class="row">
+                  <div class="col-md-9">
+                    Questions
+                  </div>
+                  <div class="col-md-1">
+                    Yes
+                  </div>
+                  <div class="col-md-1">
+                    No
+                  </div>
+                  <div class="col-md-1">
+                    N/A
+                  </div>
+                </div>
+              </div>
+              <div class="rows-striped">
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Have you made or do you plan to make any changes or improvements to your home?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Do you own any jewelry, art, or collections valued at $500 or more. Do you own a Jet-Ski. ATV, or Snow Mobile?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Is your liability insurance sufficient to cover your current net worth and future income against a catastrophic loss?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Do you have any insurance policies with other carriers?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Are there any new household members in your residence?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Does anyone in your household own a business or work from home?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *In the last 5 years, have you or anyone in your household changed jobs?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *If your spouse can no longer earn an income, do you know how you would replace it?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+                <div class="row question">
+                  <div class="col-md-9">
+                    *Do you know how much money you need to retire and are you currently on pace?
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <span class="hidden-md hidden-lg">Yes</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <span class="hidden-md hidden-lg">No</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 col-sm-2 col-xs-4">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <span class="hidden-md hidden-lg">N/A</span>
+                      </label>
+                    </div>
+                  </div>
+                </div> <!-- ./question -->
+              </div>
+              <div class="form-group">
+                <div class="col-md-12 checkbox">
+                  <label class="checkbox-inline">
+                    <input type="checkbox" value="">
+                    Send 'Thank You' eMail <a data-toggle="modal" data-target="#thankyou-preview" href="#thankyou-preview" class="">(Preview)</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="row">
+            <div class="col-md-6">
+              <h3 class="title"> Add a Comment</h3>
+              <textarea class="form-control textarea-expand" rows="1"></textarea>
+              <!-- <div class="btn-group btn-group-justified" role="group" id="comment-group">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="fa fa-comment"></span><span class=""> Quick Comment <span class="caret"></span></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0)">Quick Comment</a></li>
+                    <li><a href="javascript:void(0)">&lt;Customized Quick Comments&gt;</a></li>
+                    <li><a href="javascript:void(0)">Asked customer if they would be interested in life insurance</a></li>
+                    <li><a href="javascript:void(0)">Asked customer to buy life insurance, based on their demonstrated need.</a></li>
+                    <li><a href="javascript:void(0)">Asked for Life appointment</a></li>
+                    <li><a href="javascript:void(0)">Assigned to CSR for follow up</a></li>
+                    <li><a href="javascript:void(0)">Call back in a month</a></li>
+                    <li><a href="javascript:void(0)">Call back in a week</a></li>
+                    <li><a href="javascript:void(0)">call me please</a></li>
+                    <li><a href="javascript:void(0)">Called customer about life insurance. They responded</a></li>
+                    <li><a href="javascript:void(0)">Called customer to notify of impending cancellation due to no premium. Asked them to submit premium</a></li>
+                    <li><a href="javascript:void(0)">Customer called in to report a claim</a></li>
+                    <li><a href="javascript:void(0)">Emailed customer about appointment, gave date/time reminder</a></li>
+                    <li><a href="javascript:void(0)">Emailed customer about upcoming renewal of policy, asked for appointment to review needs</a></li>
+                    <li><a href="javascript:void(0)">Followed-up with the customer regarding the claims filed for auto and home</a></a></li>
+                    <li><a href="javascript:void(0)">Left message to Call back.</a></li>
+                    <li><a href="javascript:void(0)">Sent customer a second email notice of impending cancellation</a></li>
+                    <li><a href="javascript:void(0)">Sent email reminder about premium due<</a></li>
+                    <li><a href="javascript:void(0)">&lt;Company Quick Comments&gt;</a></li>
+                    <li><a href="javascript:void(0)">21st Century - A - Invalid Customer Data (INV)</a></li>
+                    <li><a href="javascript:void(0)">21st Century - B - Did Not Reach (DNR)</a></li>
+                    <li><a href="javascript:void(0)">21st Century - C - Contact, Prior Purchase (CPP)</a></li>
+                    <li><a href="javascript:void(0)">21st Century - D - Contact, No Quote (CNQ)</a></li>
+                    <li><a href="javascript:void(0)">21st Century - E - Quote Not Bound (QNB)</a></li>
+                    <li><a href="javascript:void(0)">21st Century - F - Bound (BND)</a></li>
+                    <li><a href="javascript:void(0)">Batch filed documents from insured</a></li>
+                    <li><a href="javascript:void(0)">Called and asked about Auto</a></li>
+                    <li><a href="javascript:void(0)">Called and asked about Home</a></li>
+                    <li><a href="javascript:void(0)">Called and asked about Life</a></li>
+                    <li><a href="javascript:void(0)">Called and left message</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="fa fa-user"></span><span class=""> Spoke With <span class="caret"></span></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0)">Agent</a></li>
+                    <li><a href="javascript:void(0)">Staff1</a></li>
+                    <li><a href="javascript:void(0)">Staff 2</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="fa fa-phone"></span><span class=""> Phone Number <span class="caret"></span></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0)">555-555-5555</a></li>
+                    <li><a href="javascript:void(0)">333-333-3333</a></li>
+                  </ul>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-md-6">
+              <h3 class="title">
+                <a data-toggle="collapse" data-parent="" href="#past-appt-task"><i class="fa fa-sm fa-fw fa-chevron-right"></i></a> Past Appointments & Tasks (3)
+              </h3>
+              <div id="past-appt-task" class="collapse">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <span class="fa fa-calendar"></span> Thu Nov 6, 2014 10:00 PM
+                  </li>
+                  <li class="list-group-item">
+                    <span class="fa fa-check-square-o"></span> Wed Nov 5, 2014 9:30 AM 
+                  </li>
+                  <li class="list-group-item">
+                    <span class="fa fa-calendar"></span> Mon Nov 3, 2013 2:30 PM
+                  </li>
+                  <li class="list-group-item text-right">
+                    <a href="javascript:void(0)" class="btn btn-link btn-lg btn-more">More <span class="fa fa-angle-double-right"></span></a>
+                  </li>
+                </ul>
+              </div><!-- /#past-appt-task-->
+            </div> 
+          </div> <!-- /.row -->
+        </section>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="navbar-fixed-bottom sticky-menu">
+              <button type="button" class="btn btn-sm btn-default"><span class="fa fa-file-pdf-o fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> View FFR</span></button>
+              <a href="email-effr.html" class="btn btn-sm btn-default"><span class="fa fa-envelope-o fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Email FFR</span></a>
+              <a href="schedule-appt.html" class="btn btn-sm btn-default"><span class="fa fa-calendar fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Schedule Appointment</span></a>
+              <a href="schedule-task.html" class="btn btn-sm btn-default"><span class="fa fa-check-square-o fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Schedule Task</span></a>
+              <button type="button" class="btn btn-sm btn-link"><span class="fa fa-trash fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Clear Form</span></button>
+              <button type="button" class="btn btn-danger pull-right"><span class="fa fa-save fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Save FFR</span></button>
+            </div>
+          </div>
+        </div><!-- /.row -->
+      </form>
+
+
+      <!-- Thank You Email Preview Modal -->
+      <div class="modal fade" id="thankyou-preview" tabindex="-1" role="dialog" aria-labelledby="thankyou-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title title" id="thankyou-label">eFFR - 'Thank you' eMail Preview</h4>
+            </div>
+            <div class="modal-body">
+              <p>Dear Customer,</p>
+              <p>I want to thank you for taking the time to speak with me and making me more aware of your insurance needs. The next time you have a question about your policy, or if your needs change, please call or email me to discuss.</p>
+              <p>Again, thank you for your business. I look forward to helping you plan for what's ahead, because the more you know the smarter you can be about insurance.</p>
+              <p>Sincerely, <br/>
+                James Kirk<br/>
+                505-887-6501 (Office)<br/>
+                icmsyy03@taf1.farmersagent.com<br/>
+                http://www.taf1.farmersagent.com/icmsyy03</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal"><span class="fa fa-times"></span> Close</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.modal #thankyou-preview -->
+    </div> <!-- /.page-wrapper -->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/bootstrap-multiselect.js"></script>
+    <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.min.js"></script>
+    <script src="../js/ecms.js"></script>
+    <!--<script>
+      javascript:(function () {
+          var s = document.createElement("script");
+          s.onload = function () {
+              bootlint.showLintReportForCurrentDocument([]);
+          };
+          s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+          document.body.appendChild(s)
+      })();
+    </script> -->
+  </body>
+</html>

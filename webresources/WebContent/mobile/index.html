@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- jQuery (necessary to load navigation and includes) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+          $('body').prepend('<nav></nav>');
+          $('nav').load('nav.html');
+          $('body').append('<footer></footer>');
+          $('footer').load('footer.html');
+          $("head").load("head.html");
+      });
+
+    </script>
+  </head>
+  <body>
+    <!-- page content -->
+    <div class="container-fluid page-wrapper" id="phonebook">
+      <div class="row">
+        <div class="col-md-12">
+          <a id="menu-toggle" href="#" class="btn btn-primary open hidden-print"><span class="fa fa-arrows-h"></span></a>  
+        </div>
+        <!-- search sidebar -->
+        <div id="sidebar-wrapper" class="col-md-2 hidden-print">
+          <div class="sidebar-content">
+            <h3 class="sidebar-brand">Phonebook Search</h3>
+            <form role="form" id="searchPhonebook" name="searchPhonebook">
+              <div class="form-group">
+                <label for="input1">Search by:</label>
+                <select name="searchby" id="searchby" class="form-control state">
+                  <option value="LN">Last Name</option>
+                  <option value="FN">First Name</option>
+                  <option value="BA">Billing Account Number</option>
+                  <option value="PN">Policy Number</option>
+                  <option value="HN">Household Number</option>
+                  <option value="BN">Business Number</option>
+                  <option value="QS">Quick Search</option>
+                </select>
+                <br/>
+                <input type="text" class="form-control" id="input1" name="input1">
+              </div>
+              <div class="form-group">
+                <a data-toggle="collapse" data-parent="" href="#addtl-search-options">
+                  <h4><i class="fa fa-sm fa-fw fa-chevron-right"></i> Additional Options</h4>
+                </a>
+              </div>
+              <div class="collapse" id="addtl-search-options">
+                <div class="form-group">
+                  <label for="account-status" class="control-label"> Account Status: </label>
+                  <select multiple="multiple" class="form-control multiselect" id="account-status">
+                    <option>All</option>
+                    <option>Active</option>
+                    <option>Broker</option>
+                    <option>Inactive</option>
+                    <option>Moved out</option>
+                    <option>Personal</option>
+                    <option>prospect</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ReturnCustomers" class="control-label">	
+                    Return Customers From: 
+                  </label>
+                  <select name="ReturnCustomers" id="ReturnCustomers" class="form-control">
+                    <option value="AR">(Select)</option>
+                    <option value="AU">All Of Farmers</option>
+                    <option value="AT">Enter Age For The Records</option>
+                    <option value="BY">John Brown</option>
+                    <option value="BE">Pamel Brekke</option>
+                  </select>
+                </div>
+              </div>
+              <div class="text-center">
+                <a href="javascript:void(0)" class="btn btn-info searchquery" data-toggle="collapse" data-target="#search-results-content"><span class="fa fa-search"></span> Search</a>
+                <a href="javascript:void(0)" class="btn btn-link resetBtn"><span class="fa fa-times"></span> Clear</a>
+              </div>
+            </form>
+          </div>
+          <div id="ErrorView">
+            <br>
+          </div>
+
+        </div>
+        <!-- /search sidebar -->
+
+        <!-- search results -->
+        <div class="col-md-10 form-horizontal" id="search-results">
+          <div class="well well-small msg-welcome">
+            <h3>Welcome to eFFR Phonebook Search</h3>
+            <h5>Please enter search criteria to find a customer.</h5>
+          </div>
+          <div id="search-results-content" class="collapse">
+            <div class="page-header">
+              <h2 class="title">Search Results</h2>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <p class="text-muted small text-right">Certain Broker and/or Moved out accounts may not be returned in the search results.</p>
+              </div>
+              <div class="col-sm-4 text-right btn-group-phonebook">
+                <button type="button" class="btn btn-info btn-refresh"><span class="fa fa-refresh"></span> Refresh</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped table-bordered table-hover dt-responsive small" id="search-results-table">
+                  <thead>
+                    <tr class="info">
+                      <th class="text-center">Type</th>
+                      <th>Agent</th>
+                      <th>Status</th>
+                      <th>Name</th>
+                      <th>Account Name</th>
+                      <th>Address</th>
+                      <th>Phone/eMail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">	
+                        <a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a>
+                      </td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr> 
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">	<a href="#"><img src="../images/personalLinesIcon.gif" alt="Personal Lines Account"></a></td>
+                      <td>11-12-2014</td>
+                      <td>Active</td>
+                      <td>John Smith</td>
+                      <td>smith.j</td>								
+                      <td><a href="#">
+                          <img class="pull-right" src="../images/map_icon1cb.gif" alt="View Map" onmouseover="document.body.style.cursor = 'hand'" onmouseout="document.body.style.cursor = 'default'"></a>                           
+                        6711 S 239th Pl Apt A107
+                        <br>
+                        Kent, 
+                        WA&nbsp;&nbsp;98032
+                      </td>
+                      <td>5694561234
+                        <br>sadhkgdashj@gmail.com</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div><!-- /#search-results-content -->
+        </div><!-- /#search-results -->
+      </div><!-- /.row -->
+
+
+      <div class="row hidden" id="menu-phonebook">
+        <div class="col-md-12">
+          <div class="navbar-fixed-bottom sticky-menu">
+            <a href="email-effr.html" class="btn btn-sm btn-default"><span class="fa fa-envelope-o fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Email FFR</span></a>
+            <a href="manage-effr.html" class="btn btn-sm btn-default"><span class="fa fa-pencil fa-2x"></span><span class="hidden-xs visible-sm-block visible-md-inline visible-lg-inline"> Manage FFR</span></a>
+          </div>
+        </div>
+      </div><!-- /.row -->
+    </div> <!-- /.page-wrapper -->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/bootstrap-multiselect.js"></script>
+    <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.min.js"></script>
+    <script src="../js/ecms.js"></script>
+   <!--<script>
+      javascript:(function () {
+          var s = document.createElement("script");
+          s.onload = function () {
+              bootlint.showLintReportForCurrentDocument([]);
+          };
+          s.src = "https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";
+          document.body.appendChild(s)
+      })();
+    </script> -->
+  </body>
+</html>
+

@@ -69,12 +69,12 @@
 	   class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix">
-			<value>/pages/</value>
+			<value>/assets/views/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
-		<property name="order" value="3" />
+		<property name="order" value="0" />
 	</bean>
  
 </beans>

@@ -1,0 +1,60 @@
+
+address {
+    &.contact-update {
+        display: inline-flex;
+    }
+}
+.nav-tabs > li > a {
+    background-color: #eeeeee;
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+textarea.textarea-expand {
+    -webkit-appearance: textfield;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    margin-bottom: -10px;
+    &:focus {
+        height: 150px;
+    }
+}
+
+@media(max-width: @screen-tablet){   
+    .account-name {
+        text-align: center;
+        h3 {
+            margin-top: 0;
+        }
+    }
+    .form-horizontal {
+        .check-remind {
+            text-align: left;
+            padding-top: 0;
+        }
+    }
+    .btn-group-manage-effr {
+        text-align: center;
+        .btn-clear, .btn-search, .btn-save, .btn-more, .btn-refresh {
+            //.button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+            // display: block;
+            width: 45%;
+            //margin-bottom: 10px;
+        }
+        .btn-schedule, .btn-refresh, .btn-view, .btn-email {
+            margin-bottom: 10px;
+        }
+    }
+    .radio-group { 
+        .radio-inline {
+            margin-bottom: 10px;
+        }               
+    }
+}
+@media(min-width: @screen-tablet){   
+    .radio-group { 
+        display: inline-block;
+        .radio-inline {
+            padding-top: 0;
+        }               
+    }
+}

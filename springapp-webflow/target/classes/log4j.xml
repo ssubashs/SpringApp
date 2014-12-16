@@ -24,11 +24,16 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="org.springframework.security">
+	<logger name="org.springframework.webflow">
 		<level value="debug" />
 	</logger>
 	
-	<!--  -->
+		
+	<!-- 
+	<logger name="org.springframework.security">
+		<level value="debug" />
+	</logger>
+ -->
 	<logger name="org.springframework">
 		<level value="info" />
 	</logger>

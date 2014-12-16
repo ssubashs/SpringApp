@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.domain.Person;
+import com.app.domain.TestDomain;
 import com.app.service.CustomerRepo;
 import com.app.service.RoleRepo;
 
@@ -42,6 +43,30 @@ public class CustomerController
 		List<String> roles =  rolesRepo.allRoles();
 		model.addAttribute("roles",roles);		
 		return "customer/add";
+	}
+	
+	@RequestMapping("/views/customer")
+	public String customerJspHome(Model model)
+	{
+		log.debug("Customer request handler");
+		Iterable<Person> customers = customerRepo.findAll();
+		List<String> roles =  rolesRepo.allRoles();
+		model.addAttribute("roles",roles);
+		model.addAttribute("customers",customers);
+//		return "customer";
+		return "exportall";
+	}
+	
+	@RequestMapping("/views/exportmodel")
+	public String testExportingModel(Model model)
+	{
+		log.debug("Exporting all the models build for the request");
+		Iterable<Person> customers = customerRepo.findAll();
+		List<String> roles =  rolesRepo.allRoles();
+		model.addAttribute("roles",roles);
+		model.addAttribute("customers",customers);	
+		
+		return "exportmodel";
 	}
 
 

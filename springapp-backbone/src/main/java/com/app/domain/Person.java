@@ -2,7 +2,6 @@ package com.app.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +20,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
@@ -63,7 +59,7 @@ public class Person implements Serializable {
 	@OneToMany(mappedBy="person",fetch=FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JsonManagedReference
-	@Cascade(value = CascadeType.ALL)
+	@Cascade(value = CascadeType.ALL)	
 	private List<Userrole> userroles;
 	
 
