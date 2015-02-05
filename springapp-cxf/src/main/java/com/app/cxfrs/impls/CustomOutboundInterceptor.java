@@ -24,12 +24,13 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.service.Service;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CustomOutboundInterceptor extends AbstractPhaseInterceptor<Message>{
 	
-	private Logger logger = Logger.getLogger(CustomOutboundInterceptor.class);
 	
+	Logger logger = LoggerFactory.getLogger(CustomOutboundInterceptor.class);	
 	public CustomOutboundInterceptor() {
 		super(Phase.PRE_MARSHAL);
 		

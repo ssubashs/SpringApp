@@ -1,7 +1,6 @@
 package com.app.cxfrs.impls;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 
@@ -24,13 +23,17 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.service.Service;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.app.AuthoriseScope;
 
+
+
 public class CustomInboundInterceptor extends AbstractPhaseInterceptor<Message>{
 	
-	private Logger logger = Logger.getLogger(CustomInboundInterceptor.class);
+	
+	Logger logger = LoggerFactory.getLogger(CustomInboundInterceptor.class);	
 
 	public CustomInboundInterceptor(String phase) {
 		super(Phase.PRE_INVOKE);

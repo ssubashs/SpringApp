@@ -29,7 +29,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Entity
 @NamedQuery(name="person.findAll", query="SELECT person FROM Person person")
-@Document(collection="persons")
+@Document(collection="usercollection")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 

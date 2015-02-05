@@ -7,10 +7,11 @@ import javax.annotation.Resource;
 
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,7 +23,7 @@ import com.app.domain.Person;
 @ContextConfiguration(locations = { "classpath:META-INF/springAppConfig/appcxf-rs-client.xml" })
 public class CustomWebClient {
 
-	private Logger logger = Logger.getLogger(CustomWebClient.class);
+	Logger logger = LoggerFactory.getLogger(CustomWebClient.class);	
 	
 	@Resource(name="jsonProvider")
 	private JacksonJsonProvider jsonprovider;
@@ -38,7 +39,7 @@ public class CustomWebClient {
 		 List<Object> providers = new ArrayList<Object>();
 	     providers.add(jsonprovider);
 	   
-	     WebClient client = WebClient.create("http://localhost:8080/springapp/api", providers);
+	     WebClient client = WebClient.create("http://localhost:8080/springapp-cxf/api", providers);
 	     client = client.accept("application/json").type("application/json").path("/customer/1/person");
 	     Person person = client.get(Person.class);
 	     logger.debug("response person :: "+person.getFirstname() );
@@ -53,7 +54,7 @@ public class CustomWebClient {
 		 List<Object> providers = new ArrayList<Object>();
 	     providers.add(jsonprovider);
 	   
-	     ICustomerServ customerRepoLocal = JAXRSClientFactory.create("http://localhost:8080/springapp/api/", CustomerServiceImpl.class,providers,true);
+	     ICustomerServ customerRepoLocal = JAXRSClientFactory.create("http://localhost:8080/springapp-cxf/api/", CustomerServiceImpl.class,providers,true);
 	     
 	     logger.debug("response person :: "+customerRepoLocal.fetchbyId(2).getFirstname());
 	    
