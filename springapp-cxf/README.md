@@ -14,5 +14,5 @@ http://localhost:8080/springapp/app/customer
 JAX-RS CXF servlet for customer entities. 
 http://localhost:8080/springapp/api
 
-Backbone js demo.
-http://localhost:8080/springapp/app/assets/pages/bootstrap.html
+In progress.. ..
+

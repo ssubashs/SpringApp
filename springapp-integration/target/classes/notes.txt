@@ -1,0 +1,1 @@
+xjc -d java -p com.saml -httpproxy uname:pwd@host:port -XautoNameResolution resources\saml-2.0-os\saml-schema-assertion-2.0.xsd

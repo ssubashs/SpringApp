@@ -4,15 +4,6 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="spring-batch-admin-manager-2.0.0.BUILD-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spring-batch-admin-manager/spring-batch-admin-manager">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="spring-batch-integration-2.0.0.BUILD-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spring-batch-integration/spring-batch-integration">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="spring-batch-admin-resources-2.0.0.BUILD-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spring-batch-admin-resources/spring-batch-admin-resources">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="batch_smartoffice-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/batch_smartoffice/batch_smartoffice">
             <dependency-type>uses</dependency-type>
         </dependent-module>
