@@ -17,6 +17,8 @@ mysql setup file with data - batch_smartoffice\src\main\resources\META-INF\dbset
 	- http://localhost:8080/batchadmin/
 	- webapp/styles has the styles to overwrite the default app setting. 
 	- webapp\WEB-INF\web\layouts\html has the ftls to overwrite the admin UI.
+	- dependent spring admin source projects  spring-batch-admin-* and spring-batch-* should be build prior to this project build.
+	
 3) batchapp
 	- jasper for downloading reports in pdf and excel
 	- thymeleaf templates for html report.
