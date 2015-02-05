@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<title>Agent quarterly Report</title>
+ <link href="../../../../resources/css/bootstrap.min.css" th:href="@{/app/assets/css/bootstrap.min.css}" rel="stylesheet"  media="screen" />
+ <link href="../../../../resources/css/custom.css" th:href="@{/app/assets/css/custom.css}" rel="stylesheet"  media="screen" />
+    <style type="text/css" >
+    
+    body {
+  min-height: 2000px;
+  padding-top: 50px;
+}
+ 		
+     name-and-company
+  {
+    background: url(data:image/png;base64,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) top left no-repeat;
+    width: 225px;
+    height: 50px;
+    position:relative;
+    top:0px;
+    left:0px;
+  }
+  
+
+    
+	</style>
+</head>
+<body>
+     <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+           <a class="navbar-brand" href="#">
+	       
+	      </a>
+          <a class="navbar-brand" href="#">Report Application</a>
+        </div>
+        <div class="navbar-collapse collapse pull-right">                 
+         		 <div class="navbar-brand">							
+					<h4 th:text="'User :'+ ${agent.getFirstname()}+', '+ ${agent.getLastname()}">User: ssubashs</h4>
+				</div>
+				<div class="navbar-brand">							
+					<h4 th:text="'Manager :'+ ${agent.getDmfirstname()}+', '+ ${agent.getDmlastname()}">Manager : Reportme</h4>
+				</div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+
+<div  class="container">
+
+			
+			<div class="row">	
+				<div class="col-md-2" id="menu">
+					<div class="well">						
+						<div id="tagsAll" >
+							<h4 style="padding-top: 20px">Export data
+							
+								</h4>
+							<ul class="nav nav-pills nav-stacked" id="exportaction">
+							   <li id="pdfexport"><a class="render-partial" href="#">PDF</a></li>
+							   <li id="xlsexport"><a class="render-partial" href="#">MSExcel</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div  class="col-md-10" id="pageContent">
+				<div class="row">
+					<div class="panel panel-primary	well">
+				        <div class="panel-heading">
+				            <h3 class="panel-title">Performance data</h3>
+				        </div>
+			        	<div class="panel-body">
+						
+								<table class="table table-bordered"> 
+									<colgroup>
+								        <col span="1"></col>
+								        <col span="3" class="info"></col>
+								        <col span="3" class="success"></col>
+								         <col span="3" class="info"></col>
+								        <col span="3" class="success"></col>
+								        <col span="1"></col>
+								    </colgroup>
+								    <thead>
+								        <tr>
+								            <th colspan="1"></th>
+								            <th colspan="3" style="text-align: center;" th:text="'Auto'+ ${year} + '- quarter' + ${quarter}">Auto 2014</th>
+								            <th colspan="3" style="text-align: center;" th:text="'Fire' + ${year} + '- quarter' + ${quarter}">Fire 2014</th>
+								            <th colspan="3" style="text-align: center;" th:text="'Auto' + (${year}-1)">Auto 2013</th>
+								            <th colspan="3" style="text-align: center;" th:text="'Fire' + (${year}-1)">Fire 2013</th>
+								            <th colspan="1"></th>
+								        </tr>
+								        <tr>
+								        	<th>Topline metrics</th>
+								        	<th>Agent</th>
+								        	<th>District</th>
+								        	<th>State</th>
+								        	<th>Agent</th>
+								        	<th>District</th>
+								        	<th>State</th>
+								        	<th>Agent</th>
+								        	<th>District</th>
+								        	<th>State</th>
+								        	<th>Agent</th>
+								        	<th>District</th>
+								        	<th>State</th>
+								        	<th>Focus area</th>
+								        </tr>
+								        
+								    </thead>
+								    <tbody>
+								    <tr th:each="pview : ${performanceData}" th:class= "(${pview.focusarea}=='Y')? 'danger' :'' ">
+								        	<td th:text="${pview.datacategory}">Retention</td>
+								        	<td th:text="${pview.autoagentdata}">3242</td>
+								        	<td th:text="${pview.autodistrictdata}">213</td>
+								        	<td th:text="${pview.autostatedata}">213</td>
+								        	<td th:text="${pview.fireagentdata}">3213</td>
+								        	<td th:text="${pview.firedistrictdata}">312</td>
+								        	<td th:text="${pview.firestatedata}">534</td>
+								        	<td th:text="${pview.pastautoagentdata}">3242</td>
+								        	<td th:text="${pview.pastautodistrictdata}">232</td>
+								        	<td th:text="${pview.pastautostatedata}">324</td>
+								        	<td th:text="${pview.pastfireagentdata}">8664</td>
+								        	<td th:text="${pview.pastfiredistrictdata}">324</td>
+								        	<td th:text="${pview.pastfirestatedata}">324</td>
+								        	<td th:text="${pview.focusarea}">Y</td>
+								        </tr>
+									  </tbody>
+								</table>
+						
+						</div>
+					</div>	
+				</div>	
+				<div class="row" id="agentperformanceRecommedation">
+						<div class="col-md-3 pull-left">
+							<div class="panel panel-primary	well pull-left">
+						        <div class="panel-heading">
+						            <h3 class="panel-title">Agent growth model</h3>
+						        </div>
+					        	<div class="panel-body">
+					        	 AAA - 6.25
+					        	</div>
+					        </div>	
+						</div>
+						<div class="col-md-9">
+							<div class="panel panel-primary	well">
+						        <div class="panel-heading">
+						            <h3 class="panel-title">Top tips and sales oppurtunities</h3>
+						        </div>
+					        	<div class="panel-body">
+					        
+					        		<p  th:each="rcomm : ${recommendations}" th:text="${rcomm.id.lob} +'->' + ${rcomm.id.category}+'::' + ${rcomm.description}">Through your 1st quarter grow your pif for more sales</p>
+					        		
+					        	</div>
+					        </div>
+						
+						</div>
+					</div>
+				</div>	
+				
+			
+			</div>
+</div>
+
+<script type="text/javascript" src="../../../../resources/js/jquery-1.8.3.min.js" th:src="@{/app/assets/js/jquery-1.8.3.min.js}"></script>
+<script type="text/javascript" src="../../../../resources/js/bootstrap.min.js" th:src="@{/app/assets/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../../../../resources/js/jspdf.min.js" th:src="@{/app/assets/js/jspdf.min.js}"></script>
+<script type="text/javascript">
+			jQuery(function($) {
+				var downloadurl = 'http://localhost:8080/batchapp/app/downloadreport/';
+				var specialElementHandlers = {
+				        '#editor': function (element,renderer) {
+				            return true;
+				        }
+				};
+				$('#exportaction').on('click','#pdfexport',function(){
+					 console.log('onclick of export pdf');
+				
+					var pathname = window.location.pathname.split("/");
+					var quarter = pathname[pathname.length-1];
+					var year = pathname[pathname.length-2];
+					var aor = pathname[pathname.length-3];
+					console.log('parameters extracted from path ::: aor '+aor + '  , year '+year + ' ,quarter '+quarter  );
+					// var doc = new jsPDF();
+				      //  doc.fromHTML($('#pageContent').html(), 15, 15, {
+				        //    'width': 170,'elementHandlers': specialElementHandlers
+				       // });
+				       // doc.save('worksmart_040302_2012.pdf');
+					window.open(downloadurl+'pdf/'+aor+'/'+year+'/'+quarter);
+					});
+				
+				$('#exportaction').on('click','#xlsexport',function(){
+					 console.log('onclick of export pdf');
+				
+					var pathname = window.location.pathname.split("/");
+					var quarter = pathname[pathname.length-1];
+					var year = pathname[pathname.length-2];
+					var aor = pathname[pathname.length-3];
+					console.log('parameters extracted from path ::: aor '+aor + '  , year '+year + ' ,quarter '+quarter  );
+					// var doc = new jsPDF();
+				      //  doc.fromHTML($('#pageContent').html(), 15, 15, {
+				        //    'width': 170,'elementHandlers': specialElementHandlers
+				       // });
+				       // doc.save('worksmart_040302_2012.pdf');
+					window.open(downloadurl+'xls/'+aor+'/'+year+'/'+quarter);
+					});
+					
+
+			});
+		</script>	
+
+</body>
+</html>

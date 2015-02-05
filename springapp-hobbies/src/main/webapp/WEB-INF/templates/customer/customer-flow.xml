@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        
+    <persistence-context />
+        
+    <var name="person" class="com.app.domain.Person"/>
+    <var name="contact" class="com.app.domain.Contact"/>
+    <var name="userrole" class="com.app.domain.Userrole"/>
+
+	<view-state id="home" view="customer/home">
+		<on-render>
+			<evaluate expression="flowService.getRoles()" result="flowScope.roles"></evaluate>
+			<evaluate expression="flowService.getCustomers()" result="flowScope.customers"></evaluate>
+		</on-render>
+		<transition to="addPerson" on="addUser"></transition>
+	</view-state>
+	
+	<view-state id="viewRole" view="customer/something">		
+		<on-render>
+			<evaluate expression="flowService.getRoles()" result="flowScope.roles"></evaluate>
+			<evaluate expression="flowService.getCustomers(flowRequestContext)" result="flowScope.customers"></evaluate>
+		</on-render>		
+	</view-state>
+	
+	<view-state id="addPerson" view="customer/addPerson" model="person">
+		<transition to="addContact" on="submit"></transition>
+		<on-exit>
+			<evaluate expression="flowService.savePerson(person)"></evaluate>
+		</on-exit>
+	</view-state>
+	
+	<view-state id="addContact" view="customer/addContact" model="contact">
+		<transition to="addUserrole" on="submit"></transition>
+		<on-exit>
+			<evaluate expression="flowService.saveContact(contact)"></evaluate>
+		</on-exit>
+	</view-state>
+	
+	<view-state id="addUserrole" view="customer/addUserrole" model="userrole">
+		<transition to="home" on="submit"></transition>
+		<on-exit>
+			<evaluate expression="flowService.saveUserrole(userrole)"></evaluate>
+		</on-exit>
+	</view-state>
+</flow>

@@ -1,0 +1,26 @@
+//created on: Sep 30, 2014
+package rules
+
+//list any import classes here.
+
+import com.farmers.batch.kyn.Agentmonthly;
+import com.farmers.batch.kyn.AgentActions;
+
+//declare any global variables here
+
+global com.farmers.batch.kyn.AgentActions agentactions;
+
+dialect "mvel"
+
+rule "ImproveQuote : Agent close rate and retention"
+
+    when
+        $agentmonthly : Agentmonthly(closerate >= 15 && closerate <= 17, retention >= 82 && retention <= 83)
+       
+    then
+        System.out.println(" Improve quoting --> "+ $agentmonthly.toString());
+        agentactions.addAction($agentmonthly,"Quotes","Increase quoting percentage by 7%");
+
+end
+
+

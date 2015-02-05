@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://www.springframework.org/schema/tx 
+	   http://www.springframework.org/schema/tx/spring-tx.xsd   
+	   http://www.springframework.org/schema/context 
+	   http://www.springframework.org/schema/context/spring-context.xsd   
+	   http://www.springframework.org/schema/jee 
+	   http://www.springframework.org/schema/jee/spring-jee.xsd	   
+	   http://www.springframework.org/schema/lang
+	   http://www.springframework.org/schema/lang/spring-lang.xsd
+	   http://www.springframework.org/schema/security 
+	   http://www.springframework.org/schema/security/spring-security.xsd
+	   http://www.springframework.org/schema/data/jpa
+   	   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+   	   http://www.springframework.org/schema/util 
+   	   http://www.springframework.org/schema/util/spring-util.xsd
+   	   http://www.springframework.org/schema/jdbc 
+   	   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+
+
+
+	
+
+
+	<!-- ******************************************************************** -->
+	<!-- Setup the transaction manager -->
+	<!-- ******************************************************************** -->
+	
+	<!-- Configure the Spring framework to use jpa transaction manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="defaultEMF" />		
+	</bean>
+	
+	<!-- ******************************************************************** -->
+	<!-- Mark bean transactions as annotation driven -->
+	<!-- ******************************************************************** -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+
+	<!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" 
+		p:entityManagerFactory-ref="ADE_EMF" /> -->
+
+	<!-- ******************************************************************** -->
+	<!-- Setup a data source -->
+	<!-- ******************************************************************** -->
+
+
+	<!-- ******************************************************************** -->
+	<!-- PropertyConfigurer for the DAO -->	 
+	<context:property-placeholder location="classpath:application-dao-h2.properties"/> 
+	
+	<!-- Using Apache DBCP Data Sources -->
+	<!-- 
+	<bean name="defaultDS" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${db.connection.driver_class}" />
+		<property name="username" value="${db.connection.username}" />
+		<property name="password" value="${db.connection.password}" />
+		<property name="url" value="${db.connection.url}" />
+		<property name="maxIdle" value="${db.minPoolSize}" />
+		<property name="maxActive" value="${db.maxPoolSize}" />
+	</bean>
+ 	-->
+ 	
+ 	<jdbc:embedded-database id="defaultDS" type="H2" >
+ 	   <!--  <jdbc:script location="classpath:META-INF/embeddedH2.sql"/>  --> 
+	</jdbc:embedded-database> 
+	
+	<!-- ******************************************************************** -->
+	<!-- Setup each persistence unit -->
+	<!-- ******************************************************************** -->
+
+
+
+	<!-- Configure a JPA vendor adapter -->
+	<!-- -->
+	<bean id="hmedJPAVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="${db.show_sql}" />
+		<property name="generateDdl" value="${db.generateDdl}" />
+		<property name="databasePlatform" value="${db.dialect}" />
+	</bean>
+
+	<!-- EntityManager Factory that brings together the persistence unit, datasource, 
+		and JPA Vendor -->
+	<!-- -->
+	<bean id="defaultEMF"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		 <property name="dataSource" ref="defaultDS" />
+      <property name="packagesToScan" value="com.app.domain" />
+      <property name="jpaVendorAdapter">
+         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+      </property>
+      <property name="jpaProperties">
+         <props>                  
+            <prop key="hibernate.hbm2ddl.auto">${db.hbm2ddl}</prop>         
+            <prop key="hibernate.dialect">${db.dialect}</prop>
+            <prop key="hibernate.hbm2ddl.import_files">${db.import_files}</prop>
+         </props>
+      </property>
+
+	</bean>
+
+	
+
+	<jpa:repositories base-package="com.app.service" />
+
+</beans>

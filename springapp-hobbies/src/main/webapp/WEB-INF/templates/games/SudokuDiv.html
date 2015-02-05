@@ -1,0 +1,26 @@
+		<div class="gridmain" th:fragment="sudokuGrid">					
+					
+						<div class="center page-header" id="header">
+							<h1>
+								Sudoku 
+							</h1>	
+								<div class="btn-group" id="actions">
+												<button class="btn btn-success" id="btn-newPuzzle" targetDiv="sudocontainer">3X3</button>
+												<button class="btn btn-success" id="btn-EnterPuzzle" targetDiv="sudocontainer">Create</button>
+												<button class="btn btn-warning" id="btn-reset" targetDiv="sudocontainer">Reset</button>
+												<button class="btn btn-danger" id="btn-save" targetDiv="sudocontainer">Save</button>
+												<button class="btn btn-danger" id="btn-validate" targetDiv="sudocontainer">validate</button>
+												<button class="btn btn-success" id="btn-solvePuzzle" targetDiv="sudocontainer">Solve</button>
+													
+								</div>
+								
+							
+							<div id="message"></div>
+						</div><!-- /.page-header -->
+
+						<div  class="sudoGrid" id="sudocontainer">
+
+						</div>
+								
+					
+		</div><!-- /main -->

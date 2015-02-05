@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+          
+  <mapping> 
+    <class-a>com.farmers.batch.kyn.Agentmonthly</class-a>
+    <class-b>com.farmers.data.MonthlyPerformanceData</class-b>   
+  
+	  <field><a>id.month</a><b>month</b></field>
+	  <field><a>id.year</a><b>year</b></field>
+	  <field><a>id.lob</a><b>performanceData.lob</b></field>
+	  <field><a>quotes</a><b>performanceData.quotes</b></field>    
+	  <field><a>pif</a><b>performanceData.pif</b></field>
+	  <field><a>newbusiness</a><b>performanceData.newbusiness</b></field>
+	  <field><a>ytdquotes</a><b>performanceData.ytdquotes</b></field>    
+	  <field><a>ytdpif</a><b>performanceData.ytdpif</b></field>
+	  <field><a>ytdnewbusiness</a><b>performanceData.ytdnewbusiness</b></field>	  
+	  
+  </mapping>  
+  
+  <mapping> 
+    <class-a>com.farmers.batch.kyn.Districtmonthly</class-a>
+    <class-b>com.farmers.data.MonthlyPerformanceData</class-b>   
+  
+	  <field><a>id.month</a><b>month</b></field>
+	  <field><a>id.year</a><b>year</b></field>
+	  <field><a>id.lob</a><b>performanceData.lob</b></field>
+	  <field><a>quotes</a><b>performanceData.quotes</b></field>    
+	  <field><a>pif</a><b>performanceData.pif</b></field>
+	  <field><a>newbusiness</a><b>performanceData.newbusiness</b></field>
+	  <field><a>ytdquotes</a><b>performanceData.ytdquotes</b></field>    
+	  <field><a>ytdpif</a><b>performanceData.ytdpif</b></field>
+	  <field><a>ytdnewbusiness</a><b>performanceData.ytdnewbusiness</b></field>	  
+	  
+  </mapping>  
+  
+  <mapping> 
+    <class-a>com.farmers.batch.kyn.Statemonthly</class-a>
+    <class-b>com.farmers.data.MonthlyPerformanceData</class-b>   
+  
+	  <field><a>id.month</a><b>month</b></field>
+	  <field><a>id.year</a><b>year</b></field>
+	  <field><a>id.lob</a><b>performanceData.lob</b></field>
+	  <field><a>quotes</a><b>performanceData.quotes</b></field>    
+	  <field><a>pif</a><b>performanceData.pif</b></field>
+	  <field><a>newbusiness</a><b>performanceData.newbusiness</b></field>
+	  <field><a>ytdquotes</a><b>performanceData.ytdquotes</b></field>    
+	  <field><a>ytdpif</a><b>performanceData.ytdpif</b></field>
+	  <field><a>ytdnewbusiness</a><b>performanceData.ytdnewbusiness</b></field>	  
+	  
+  </mapping>
+
+ 
+ </mappings> 

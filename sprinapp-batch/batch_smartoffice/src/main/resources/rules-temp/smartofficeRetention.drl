@@ -1,0 +1,26 @@
+//created on: Sep 30, 2014
+package rules
+
+//list any import classes here.
+
+import com.farmers.batch.kyn.Agentmonthly;
+import com.farmers.batch.kyn.AgentActions;
+
+//declare any global variables here
+
+global com.farmers.batch.kyn.AgentActions agentactions;
+
+dialect "mvel"
+
+rule "Retentionrule : Agent close rate and retention"
+
+    when
+        $agentmonthly : Agentmonthly(closerate >= 50 && closerate <= 90, retention >= 50 && retention <= 90)
+       
+    then
+        System.out.println(" Improve Retention --> "+ $agentmonthly.toString());
+        agentactions.addAction($agentmonthly,"Retention","Doing good !!! work on maintaining retention");
+
+end
+
+

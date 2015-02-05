@@ -1,0 +1,21 @@
+//created on: Sep 30, 2014
+package rules
+
+//list any import classes here.
+
+import com.farmers.batch.kyn.Agentmonthly;
+
+//declare any global variables here
+
+dialect "mvel"
+
+rule "Agent newbusiness greater than quotes"
+
+    when
+        $agentmonthly : Agentmonthly(quotes < newbusiness)
+    then
+        System.out.println("quote < nb :: "+ $agentmonthly.toString());
+
+end
+
+

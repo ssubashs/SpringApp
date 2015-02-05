@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.project</groupId>
+  <artifactId>rulesSmartoffice</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>rulesProject</name>
+  <description>SmartOffice Rules for Batch</description>
+ 	<properties>		
+  		<droolsVersion>6.0.0.Final</droolsVersion>
+	</properties>
+	
+	
+	<dependencies>
+		<dependency>
+		    <groupId>org.drools</groupId>
+		    <artifactId>drools-compiler</artifactId>
+		    <version>${droolsVersion}</version>
+  		</dependency>
+  		<!--  local dependency  -->
+		<dependency>
+			<groupId>com.project</groupId>
+			<artifactId>batch_smartoffice</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-jpa-2.0-api</artifactId>
+					<groupId>org.hibernate.javax.persistence</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+  
+</project>

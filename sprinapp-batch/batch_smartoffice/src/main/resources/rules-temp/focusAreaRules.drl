@@ -1,0 +1,26 @@
+//created on: Sep 30, 2014
+package rules
+
+//list any import classes here.
+
+import com.farmers.batch.kyn.Reportview;
+import com.farmers.batch.kyn.AgentActions;
+
+//declare any global variables here
+
+global com.farmers.batch.kyn.AgentActions agentactions;
+
+dialect "mvel"
+
+rule "Focus Area : Message"
+
+    when
+        $reportview : Reportview(focusarea = 'Y')
+       
+    then
+        System.out.println(" Focus Area --> "+ $reportview.toString());
+        agentactions.addAction($reportview,"Focus Area","Looking at your book, the biggest opportunity for the quarter " + $reportview.getId().getQuarter() +", is "+$reportview.getId().getDatacategory());
+
+end
+
+

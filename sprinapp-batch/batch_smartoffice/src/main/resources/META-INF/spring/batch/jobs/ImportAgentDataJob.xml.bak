@@ -1,0 +1,192 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+		http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 	
+	<batch:job id="LoadAgentPerformanceData">
+	  
+	  <batch:step id="loadQuotesFromADE"
+	  	next="loadPolicyDetailsFromICE">
+		<batch:tasklet>		
+			<batch:chunk reader="loadQuoteFromADEQuery"  writer="jpaMonthlyQuoteDataWriter" 
+                              processor="DataProcessor" commit-interval="10">
+			</batch:chunk>			
+		</batch:tasklet>
+	  </batch:step>
+	  
+	  <batch:step id="loadPolicyDetailsFromICE" next="reEvaluateCloseRate">
+	  <batch:tasklet>		
+			<batch:chunk reader="loadQuoteFromADE_ICEQuery"  writer="jpaMonthlyPolicyDataWriter" 
+                              processor="DataProcessor" commit-interval="10">
+			</batch:chunk>			
+		</batch:tasklet>
+	  </batch:step>
+
+	  <batch:step id="reEvaluateCloseRate"  >
+	   	<batch:tasklet>		
+			<batch:chunk reader="loadAllMonthlyData"  writer="jpaMonthlyDataWriter" 
+                              processor="closeRateProcessor" commit-interval="50">
+			</batch:chunk>			
+		</batch:tasklet>	  
+	  </batch:step>
+	  
+	 
+
+	  
+ 	  
+	
+
+	</batch:job>
+	
+	<batch:job id="loadAgentDetailsjob">
+	 <batch:step id="loadagents">
+	   	<batch:tasklet>		
+			<batch:chunk reader="readAgentDetailsQuery"  writer="jpaAgentDetailsWriter" 
+                              processor="agentDetailsProcessor" commit-interval="30">
+			</batch:chunk>			
+		</batch:tasklet>	  
+	  </batch:step>
+	</batch:job>
+	
+	<batch:job id="ytdcalculation">
+	 <batch:step id="reEvaluateAgentYtds">
+	   	<batch:tasklet>		
+			<batch:chunk reader="loadAllMonthlyData"  writer="jpaYTDAgentDataWriter" 
+                              processor="agentYTDProcessor" commit-interval="50">
+			</batch:chunk>			
+		</batch:tasklet>	  
+	  </batch:step>
+	
+	</batch:job>
+	
+	<batch:job id="stateRollup">
+	  <batch:step id="stateRollup-all" >
+		   <batch:tasklet ref="monthlystateRollups">		 		
+	  		 </batch:tasklet>
+	  </batch:step>
+	
+	</batch:job>
+	
+	<batch:job id="districtRollup">
+		<batch:step id="districtrollup-all" >
+	 		 <batch:tasklet ref="monthlydistrictRollups">		 		
+	  		 </batch:tasklet>
+		
+	  </batch:step>
+	
+	</batch:job>
+	
+	
+	<batch:job id="runrecommendation">
+		<batch:step id="dbrules" >
+	 		 <batch:tasklet ref="dbdroolsRules">		 		
+	  		 </batch:tasklet>
+		
+	  </batch:step>
+	
+	</batch:job>
+
+	<bean id="loadAllMonthlyData"
+	    class="org.springframework.batch.item.database.JpaPagingItemReader">
+	    <property name="entityManagerFactory" ref="customentityManagerFactory" />
+	    <property name="queryString" value="select monthly from Agentmonthly monthly " />
+	</bean>
+	
+<!-- 	
+	<bean id="loadDataForDistrictRollUp"
+	    class="org.springframework.batch.item.database.JpaPagingItemReader">
+	    <property name="entityManagerFactory" ref="entityManagerFactory" />
+	    <property name="queryString" value="SELECT monthly.district,monthly.lob,monthly.year,monthly.month, sum(monthly.quotes) as quotes, sum(monthly.pif) as pif, sum(monthly.newbusiness) as newbusiness FROM agentmonthly monthly  group by monthly.district,monthly.lob,monthly.year,monthly.month" />
+	</bean>
+	
+	
+	<bean id="loadDataForStateRollUp"
+	    class="org.springframework.batch.item.database.JpaPagingItemReader">
+	    <property name="entityManagerFactory" ref="entityManagerFactory" />
+	    <property name="queryString" value="select monthly from Agentmonthly monthly where monthly.quotes > 0 " />
+	</bean>
+ -->
+ 
+ 
+ <bean id="readAgentDetailsQuery" 
+		  class="org.springframework.batch.item.database.JdbcCursorItemReader" scope="step">
+		<property name="dataSource" ref="MainframeDS" />
+		<property name="rowMapper">
+			<bean class="com.farmers.batch.kyn.quote.AgentDetailsRowMapper" />
+		</property>
+		<property name="sql">
+			<value> select agents.agent_of_rec as agentnum,agents.agency_name as agencyname,
+					agents.agt_type_desc as agenttype, agents.first_name as firstname, 
+					agents.last_name as lastname, dms.first_name as dmfirstname, 
+					dms.last_name as dmlastname, agents.agent_status_cd as status,
+					agents.email_address as email
+  							from DFBP31P.TWEB_AGENT_DTLS agents, 
+  							(select dmrecord.first_name,dmrecord.last_name,dmrecord.agent_of_rec from DFBP31P.TWEB_AGENT_DTLS dmrecord where dmrecord.agt_type_cd = '01' and dmrecord.agent_of_rec='#{jobParameters['dmid']}') dms 
+  					where dms.agent_of_rec = agents.dm_id
+			</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="loadQuoteFromADEQuery" 
+		  class="org.springframework.batch.item.database.JdbcCursorItemReader">
+		<property name="dataSource" ref="MainframeDS" />
+		<property name="rowMapper">
+			<bean class="com.farmers.batch.kyn.quote.QuoteSummary2QuoteRowMapper" />
+		</property>
+		<property name="sql">
+			<value>select * from DFBP31P.TWEB_QT2CONV_SUMRY quote,
+			(select AGENT_OF_REC,TRANS_YR,TRANS_MTH,RECORD_LEVEL_CD, max(INS_DTSTMP) as INS_DTSTMP from DFBP31P.TWEB_QT2CONV_SUMRY group by AGENT_OF_REC,TRANS_YR,TRANS_MTH,RECORD_LEVEL_CD) as sublist
+			where quote.AGENT_OF_REC = sublist.AGENT_OF_REC and quote.TRANS_YR = sublist.TRANS_YR and quote.TRANS_MTH = sublist.TRANS_MTH and quote.RECORD_LEVEL_CD = sublist.RECORD_LEVEL_CD and quote.INS_DTSTMP = sublist.INS_DTSTMP 
+			and quote.RECORD_LEVEL_CD = 'A' and quote.AGENT_OF_REC = '040302'
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="loadQuoteFromADE_ICEQuery" 
+		  class="org.springframework.batch.item.database.JdbcCursorItemReader">
+		<property name="dataSource" ref="MainframeDS" />
+		<property name="rowMapper">
+			<bean class="com.farmers.batch.kyn.quote.ICEData2RowMapper" />
+		</property>
+		<property name="sql">
+			<value>select concat(rtrim(char(farmers_state_cd)),ltrim(concat(agt_district_cd,agt_num_last2))) as AGENT_OF_REC,DIVISION_CD, TRANS_YR,TRANS_MTH, 
+			sum(nb_auto_cur) as autonb, sum(nb_fire_cur) as firenb, sum(pif_auto_curr) as autopif, sum(pif_fire_curr) as firepif, 
+			sum(pif_auto_curr)/(sum(PIF_AUTO_PREV)+sum(nb_auto_cur)) as autoretention, sum(pif_fire_curr)/(sum(PIF_FIRE_PREV)+sum(nb_fire_cur)) as fireretention
+			from DFBP31P.TWEB_ICEINTG_NBPIF where record_level_cd='A' and farmers_state_cd=4 and agt_district_cd = '03' group by farmers_state_cd,DIVISION_CD,agt_district_cd,agt_num_last2, trans_yr,trans_mth fetch first 1000 rows only
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="loadQuoteFromADEDao" class="org.springframework.batch.item.adapter.ItemReaderAdapter">
+	    <property name="targetObject" ref="quoteTrackerDao" />
+	    <property name="targetMethod" value="findbyAOR" />
+	    <property name="arguments">
+	      <list>
+	       		<value>040302</value>
+	      </list>
+	    </property>
+	</bean>
+ 
+	<bean id="xmlItemWriter" class="org.springframework.batch.item.xml.StaxEventItemWriter">
+		<property name="resource" value="file:src/main/resources/data/output/quote.xml" />
+		<property name="marshaller" ref="reportMarshaller" />
+		<property name="rootTagName" value="Quotes" />
+	</bean>
+ 
+	<bean id="reportMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+	   <property name="classesToBeBound">
+		<list>
+			<value>com.farmers.quote.Quote</value>
+		</list>
+	    </property>
+	</bean>
+	
+ 
+	 
+	
+	
+</beans>

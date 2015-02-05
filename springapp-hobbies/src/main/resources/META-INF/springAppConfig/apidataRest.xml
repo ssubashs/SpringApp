@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+  <bean id="baseUri" class="java.net.URI">
+    <constructor-arg value="http://localhost:8080/springapp-hobbies/api"/>
+  </bean>
+ 
+  <bean id="config" class="org.springframework.data.rest.webmvc.RepositoryRestConfiguration"
+        p:jsonpParamName="callback"
+        p:jsonpOnErrParamName="errback"
+        p:baseUri-ref="baseUri">
+    <property name="domainTypeToRepositoryMappings">
+      <map key-type="java.lang.Class" value-type="java.lang.Class">
+        <entry key="com.app.domain.Person"
+               value="com.app.service.CustomerRepo"/>   
+         <entry key="com.app.domain.Contact"
+               value="com.app.service.ContactRepo"/>     
+        <entry key="com.app.domain.Userrole"
+               value="com.app.service.RoleRepo"/>               
+      </map>
+    </property>
+  </bean>
+  
+</beans>

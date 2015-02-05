@@ -27,6 +27,13 @@ public class CustomerRestController
 		return repository.save(customer);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	public Iterable<Person> getAllCustomers() 
+	{
+		return repository.findAll();
+	}
+	
 	/**
 	 * Select an existing Hperson entity
 	 * 

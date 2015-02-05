@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd" >
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+<!-- setting of TRACE, DEBUG, INFO, WARN, ERROR, FATAL log levels for a class or category -->
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>		
+	</appender>
+<!-- 
+   	<appender name="DB" class="org.apache.log4j.jdbcplus.JDBCAppender">
+	   <param name="sql" value="INSERT INTO ErrorLog (id, priority, category, thread, message, throwable, the_time) VALUES (null, '@PRIO@', '@CAT@', '@THREAD@', '@MSG@', '@THROWABLE@', now() )" />	   
+	   <param name="url" value="jdbc:mysql://10.148.143.125:3306/jayaram" />
+	   <param name="username" value="system" />
+	   <param name="password" value="system" />
+	   <param name="dbclass" value="com.mysql.jdbc.Driver" />
+	   <param name="quoteReplace" value="true"/>
+ 	   <param name="Threshold" value="error"/>  	   
+	   <param name="throwableMaxChars" value="3000"/>
+	   <param name="layoutPartsDelimiter" value="#-#"/>
+	   <layout class="org.apache.log4j.PatternLayout">
+	      <param name="ConversionPattern" value="[%t] %m#-##-#%d{dd.MM.yyyy}#-#%d{HH:mm:ss}" />
+	   </layout>	   
+	</appender>
+	 -->
+
+	<appender name="logfile" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="C:/ServerLogs/SpringIntegration.log" />
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="200KB" />
+		<param name="maxBackupIndex" value="1" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>		
+	</appender>
+	
+	<appender name="debuglogfile" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="C:/ServerLogs/SpringIntegrationDebug.log" />
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="200KB" />
+		<param name="maxBackupIndex" value="1" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="info" />
+			<param name="LevelMax" value="info" />
+		</filter>
+	</appender>
+	
+	<appender name="errorlogfile" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="C:/ServerLogs/SpringIntegrationError.log" />
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="200KB" />
+		<param name="maxBackupIndex" value="1" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>		
+	</appender>
+	
+	<!-- Application Loggers -->
+	
+	
+	<logger name="com.farmers">
+		<level value="debug" />
+	</logger>
+	
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="error" />
+	</logger>
+	<logger name="org.springframework.web">
+		<level value="error" />
+	</logger>
+	
+	<!-- <logger name="net.sf">
+		<level value="debug" />
+	</logger> -->
+	<logger name="org.springframework">
+		<level value="info" />
+	</logger>
+	
+	
+	<logger name="org.hibernate">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.dao">
+		<level value="debug" />
+	</logger>
+	
+	
+	<logger name="com.atomikos">
+		<level value="error" />
+	</logger>
+	
+	
+	<logger name="com.farmers.config.base">
+		<level value="error" />
+	</logger>
+	
+	
+<!-- 
+	<logger name="org.hibernate.SQL">
+		<level value="TRACE" />
+	</logger>
+	<logger name="org.hibernate.type">
+		<level value="TRACE" />
+	</logger>
+ -->
+	
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<!--
+		<appender-ref ref="DB" /> 
+		<appender-ref ref="debuglogfile" />
+		<appender-ref ref="errorlogfile" />
+		 -->
+	</root>
+	
+</log4j:configuration>

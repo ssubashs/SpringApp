@@ -1,0 +1,189 @@
+<html ng-app="customerApp">
+<head>
+    <title>Angular Demo</title>   
+    <link href="../css/bootstrap.min.css" rel="stylesheet"  media="screen" />
+    <style type="text/css" >
+
+      body { padding-top: 80px;}
+    
+	</style>
+
+<script type="text/javascript" src="../angular-1.3.9/angular.js"></script>
+<script type="text/javascript" src="../angular-1.3.9/angular-route.js"></script>
+</head>
+<body ng-controller="roleCtrl">
+<div class="container-fluid">
+
+			<div>
+				<div class="navbar navbar-inverse navbar-fixed-top">
+				  <div class="navbar-inner">
+					<div class="container-fluid">
+						<div id="searchbar" class="row" style="padding-top: 20px; padding-left: 20px">
+							<a id="home" class="brand" href="#">{{'Angular.js' + ' demo'}}</a>							
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>	
+			<div class="row">	
+				<div>
+					<div class="span2 well">
+						<label for="search" class="form-control">Search</label>
+	    				<input type="text" ng-model="query" id="search" class="form-control span2"/>
+    									 	
+						<a href="#/customers/create" class="btn btn-large btn-primary render-partial">Add User</a>
+						<div id="tagsAll" >
+							<h4 style="padding-top: 20px">Roles
+							<a href="#/refresh" class="icon-refresh"></a>
+								</h4>
+							<ul class="nav nav-pills nav-stacked" id="rolesAll">								
+								<li ng-repeat="role in roles.content |orderBy:role">
+									<a class="render-partial" href="#">{{role}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div  id="pageContent">
+					<div ng-view class="span10" id="content" >
+						
+					    </table>
+					</div>
+				</div>	
+			</div>
+</div>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+
+
+
+ <script type="text/javascript">   
+ var customerApp = angular.module('customerApp', ['ngRoute']);
+
+ customerApp.config(['$routeProvider',
+                     function($routeProvider) {
+                       $routeProvider.
+                         when('/customers', {
+                           templateUrl: 'http://localhost:8080/springapp-backbone/assets/pages/angularCustomer.html',
+                           controller: 'customersCtrl'
+                         }).
+                         when('/customers/:id/edit', {
+                           templateUrl: 'http://localhost:8080/springapp-backbone/assets/pages/angularCustomerEdit.html',
+                           controller: 'acustomerCtrl'
+                         }).
+                         when('/customers/create', {
+                             templateUrl: 'http://localhost:8080/springapp-backbone/assets/pages/angularCustomerEdit.html',
+                             controller: 'acustomerCtrl'
+                           }).
+                         otherwise({
+                           redirectTo: '/customers'
+                         });
+                     }]);
+ 
+ 
+ customerApp.controller('roleCtrl',['$scope', '$http', 
+  function ($scope,$http) {
+		 $http.get('http://localhost:8080/springapp-backbone/api/roleRepo/search/allRoles').success(function(data) {
+			    $scope.roles = data;
+			  });
+		 // $scope.roles = {
+		//	   "links" : [ ],
+		//	   "content" : [ "User", "ContentManager", "SuperAdmin", "Admin" ]
+		//	 }
+	 }]);
+ 
+ customerApp.controller('customersCtrl',['$scope', '$http', '$location',
+       function ($scope,$http,$location) {
+     	 $http.get('http://localhost:8080/springapp-backbone/api/customerRepo').success(function(data) {
+     		    $scope.customers = data.content;
+     			for(var j = 0; j < $scope.customers.length ;j++ )
+					{
+						var temp = $scope.customers[j].links; 					
+	 					//console.log(temp);
+	 					var selfurl;
+	 					for(var i=0;i<temp.length;i++)
+	 					{
+	 						var templink = temp[i];
+	 						//console.log(templink);
+	 						if(templink.rel=='self')
+	 						{
+	 							selfurl = templink.href;
+	 						}
+	 					}
+	 					//console.log('self url is '+ selfurl);
+	 					$scope.customers[j].url = selfurl;
+	 					var a = selfurl.split('/');
+	 					var id = a[a.length-1];	 					
+	 					console.log('id is ' +id);
+	 					$scope.customers[j].id = id;
+					}
+     		  });
+     	 
+     	 $scope.customerorderProp = 'firstname';
+     	 
+     	 
+     	// callback for ng-click 'deleteUser':
+         $scope.deleteCustomer = function (userId) {
+        	 $http.delete('http://localhost:8080/springapp-backbone/api/customerRepo/'+userId).success(function() {
+             }).success(function(){
+	        	  console.log('Delete successful');
+	        	  $location.path("/");
+	          });
+            
+         };
+     	 
+      }]);
+ 
+ customerApp.controller('acustomerCtrl',['$scope', '$http','$routeParams','$location', 
+	function ($scope,$http,$routeParams,$location) {
+			 $scope.customerId = $routeParams.id;
+			 if($scope.customerId >0) // only for edit
+			 {	 
+				 console.log("custome id in view "+$scope.customerId);
+				 var acustomerform = {id:$scope.customerId,firstname:'',lastname:'',username:''};
+				 $http.get('http://localhost:8080/springapp-backbone/api/customerRepo/'+$scope.customerId).success(function(data) {
+					 $scope.acustomer = data;
+					
+	             });
+			 }
+             
+             
+             
+      $scope.editCustomer = function() {
+    	  acustomerform = {id:$scope.customerId,firstname:$scope.acustomer.firstname,lastname:$scope.acustomer.lastname,username:$scope.acustomer.username};
+    	  console.log("posting data...." +JSON.stringify(acustomerform) );
+    	  var actionurl = 'http://localhost:8080/springapp-backbone/api/customerRepo';
+    	  var actionmethod = 'POST';
+    	  if($scope.customerId >0)
+    	  {
+    		actionurl=actionurl+'/'+$scope.customerId;
+    		actionmethod = 'PUT';
+    	  }
+    	  
+    	  $http({
+    		  url: actionurl,
+	   		    dataType: "json",
+	   		    method: actionmethod,
+	   		 	data:JSON.stringify(acustomerform),
+	   		    headers: {
+	   		        "Content-Type": "application/json"
+	   		    },
+	   		   
+    	  
+      	   }).success(function(){
+        	  console.log('post successful');
+        	  $location.path("/customers");
+          });
+    	 
+    	 
+      };        
+             
+	  }]);
+ 
+ 
+ </script>
+
+</body>
+</html>

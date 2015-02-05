@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,10 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
 
 
 /**
@@ -49,17 +49,17 @@ public class Person implements Serializable {
 	private String password;
 
 	//bi-directional many-to-one association to Contact
-	@OneToMany(mappedBy="person",fetch=FetchType.EAGER)
-	@JsonManagedReference
-	@Cascade(value = CascadeType.ALL)
+	@OneToMany(mappedBy="person",fetch=FetchType.EAGER,cascade = {
+	        CascadeType.ALL },orphanRemoval=true)
+	@JsonManagedReference	
 	private List<Contact> contacts;
 	
 	
 	//bi-directional many-to-one association to userrole
-	@OneToMany(mappedBy="person",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="person",fetch=FetchType.EAGER,cascade = {
+	        CascadeType.ALL },orphanRemoval=true)	
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JsonManagedReference
-	@Cascade(value = CascadeType.ALL)	
+	@JsonManagedReference		
 	private List<Userrole> userroles;
 	
 
