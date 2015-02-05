@@ -11,6 +11,7 @@ mysql setup file with data - batch_smartoffice\src\main\resources\META-INF\dbset
 	- sample dozer configuration/mapping
 	- unit test case to run each batch. 
 	- drools - fire rules from a rule configured in xml/db on java collections. 
+	
 2) batchadmin
 	- spring batch admin console configured to pick jobs from batch_smartoffice.
 	- http://localhost:8080/batchadmin/
