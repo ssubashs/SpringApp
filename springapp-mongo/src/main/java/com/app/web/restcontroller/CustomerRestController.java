@@ -14,7 +14,7 @@ import com.app.service.CustomerRepo;
 
 
 @Controller
-@RequestMapping(value = "/customer")
+@RequestMapping(value = "/rest/customer")
 public class CustomerRestController 
 {
 	@Autowired

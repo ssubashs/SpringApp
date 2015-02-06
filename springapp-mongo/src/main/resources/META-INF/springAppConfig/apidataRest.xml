@@ -19,7 +19,11 @@
          <entry key="com.app.domain.Contact"
                value="com.app.service.ContactRepo"/>     
         <entry key="com.app.domain.Userrole"
-               value="com.app.service.RoleRepo"/>               
+               value="com.app.service.RoleRepo"/>
+       <!-- 
+        <entry key="com.app.document.Person"
+               value="com.app.mongoservice.PersonRepo"/>               
+          -->             
       </map>
     </property>
   </bean>

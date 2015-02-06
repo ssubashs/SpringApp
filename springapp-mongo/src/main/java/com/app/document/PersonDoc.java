@@ -1,10 +1,13 @@
 package com.app.document;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "person")
-public class Person 
+public class PersonDoc 
 {
 	@Id
 	private String id;
@@ -12,7 +15,10 @@ public class Person
 	private String firstname;
 	private String lastname;
 	private String username;
-	private String[] role;
+	private List<String> role;
+	
+    @DBRef
+	private ContactDoc contact;
 	
 	
 	public String getId() {
@@ -39,12 +45,28 @@ public class Person
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String[] getRole() {
+	public List<String> getRole() {
 		return role;
 	}
-	public void setRole(String[] role) {
+	public void setRole(List<String> role) {
 		this.role = role;
 	}
+		
+	public ContactDoc getContact() {
+		return contact;
+	}
+	public void setContact(ContactDoc contact) {
+		this.contact = contact;
+	}
+	@Override
+	public String toString() {
+		return "PersonDoc [id=" + id + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", username=" + username
+				+ ", role=" + role + ", contact=" + contact + "]";
+	}
+	
+	
+	
 	
 	
 

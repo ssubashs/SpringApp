@@ -40,7 +40,7 @@
 	<!-- Configure the Spring framework to use jpa transaction manager -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="defaultEMF" />		
+		<property name="entityManagerFactory" ref="entityManagerFactory" />		
 	</bean>
 	
 	<!-- ******************************************************************** -->
@@ -96,7 +96,7 @@
 	<!-- EntityManager Factory that brings together the persistence unit, datasource, 
 		and JPA Vendor -->
 	<!-- -->
-	<bean id="defaultEMF"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		 <property name="dataSource" ref="defaultDS" />
       <property name="packagesToScan" value="com.app.domain" />

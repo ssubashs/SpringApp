@@ -24,7 +24,7 @@ public class CustomerController
 	@Autowired
 	private RoleRepo rolesRepo;
 	
-	@RequestMapping("/customer")
+	@RequestMapping("/view/customer")
 	public String customerHome(Model model)
 	{
 		log.debug("Customer request handler");
@@ -35,7 +35,7 @@ public class CustomerController
 		return "customer/home";
 	}
 	
-	@RequestMapping("/customer/add")
+	@RequestMapping("/add/customer")
 	public String addCustomer(Model model)
 	{
 		log.debug("Customer request handler");		

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.document.Person;
+import com.app.document.PersonDoc;
 
 
 
@@ -24,7 +24,7 @@ public class MongoCustomerRestController
 	private MongoOperations mongoRepo;
 	
 	@RequestMapping(method = RequestMethod.POST)	
-	public void newperson(@RequestBody Person customer) 
+	public void newperson(@RequestBody PersonDoc customer) 
 	{
 		mongoRepo.save(customer);
 	}
@@ -35,9 +35,9 @@ public class MongoCustomerRestController
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public List<Person> getAllPerson() {
+	public List<PersonDoc> getAllPerson() {
 		
-		return mongoRepo.findAll(Person.class);
+		return mongoRepo.findAll(PersonDoc.class);
 	}
 	
 //	/**

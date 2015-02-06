@@ -5,9 +5,11 @@ import java.io.Serializable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.app.domain.Person;
 
+@RepositoryRestResource(collectionResourceRel = "mysql_person", path = "customer")
 public interface CustomerRepo  extends CrudRepository<Person,Integer>, Serializable{
 	
 	public final static String authUser = "select loggedinPerson from Person loggedinPerson where loggedinPerson.username = :username and loggedinPerson.password = :password";
