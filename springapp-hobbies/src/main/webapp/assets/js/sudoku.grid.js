@@ -86,10 +86,12 @@ jQuery(function($) {
 						{
 	//						alert('not first select');
 							$('#'+selectedCellId).toggleClass("focus");
+							//$('#'+selectedCellId).toggleClass("selectfocus");
 							crossmarkGrid(selectedCellId);
 						}
 						
-						$(e.target).toggleClass("focus");	
+						$(e.target).toggleClass("focus");
+						//$('#'+selectedCellId).toggleClass("selectfocus");
 						selectedCellId = $(e.target).attr("id");
 						crossmarkGrid(selectedCellId);
 						//$(e.target).toggleClass("focus");
@@ -455,7 +457,7 @@ jQuery(function($) {
 						$('[row='+row+']').toggleClass("focus");
 						$('[col='+col+']').toggleClass("focus");
 						
-						console.log('cross mark cell '+row+','+col);
+						//console.log('cross mark cell '+row+','+col);
 					}
 				
 			});

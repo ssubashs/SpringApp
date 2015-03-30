@@ -1,8 +1,7 @@
 package com.datamodel;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 import org.codehaus.jackson.JsonParseException;
@@ -22,8 +21,17 @@ public class Basic {
 	public void init()
 	{
 		String jsonPuzzle = "{\"id\":\"50fd040b-3ac0-4c3f-9b76-b1e09ea12fca\",\"grid\":[[5,8,0,0,0,9,1,7,0],[9,7,0,0,0,5,0,0,2],[0,2,0,0,6,0,0,5,4],[0,0,0,0,5,0,0,8,0],[0,0,3,1,4,8,7,0,0],[0,9,0,0,3,0,0,0,0],[6,5,0,0,8,0,0,1,0],[4,0,0,5,0,0,0,9,8],[0,1,8,6,0,0,0,2,3]]}";
+		String puzzleid = "";
+		
 		try {
-			this.puzzle = new ObjectMapper().readValue(jsonPuzzle, Puzzle.class);
+			if(puzzleid != null && "".equalsIgnoreCase(puzzleid))
+				this.puzzle = new ObjectMapper().readValue(jsonPuzzle, Puzzle.class);
+			else
+			{
+				SudokuInmemoryService service = new SudokuInmemoryService();
+				this.puzzle = service.getPuzzle(puzzleid);
+			}
+					
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,11 +49,20 @@ public class Basic {
 	{
 		System.out.println("puzzle is "+SudokuInmemoryService.toString(this.puzzle));
 		
+//		System.out.println(this.puzzle.getClue(0, 3).toString());
 		for(int i=0;i<9;i++)
 		{
 			for(int j=0;j<9;j++)
 			{
-				System.out.println(this.puzzle.getClue(i, j).toString());
+				if(this.puzzle.getClue(i, j).getOptions().size() == 1 )
+				{
+					Iterator<Integer> it = this.puzzle.getClue(i, j).getOptions().iterator();
+					if(it.hasNext()){
+						Integer ans = it.next();
+						this.puzzle.getGrid()[i][j] = ans;
+					}
+				}
+				
 			}
 		}
 		

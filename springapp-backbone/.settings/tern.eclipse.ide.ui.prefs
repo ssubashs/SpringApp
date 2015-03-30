@@ -1,0 +1,5 @@
+contentassist-use-project-settings=true
+eclipse.preferences.version=1
+expand-function-contentassist=true
+generate-anonymous-function-contentassist=true
+omitObjectPrototype=false

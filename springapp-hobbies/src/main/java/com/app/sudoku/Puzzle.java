@@ -104,7 +104,7 @@ public class Puzzle
 		if(this.grid[row][col] == null || this.grid[row][col] != 0)
 		{
 			HashSet<Integer> cluesset = new HashSet<Integer>();
-			cluesset.add(this.grid[row][col]);
+			cluesset.add(0);
 			Clue clue = new Clue(this.getIndex(row, col));
 			clue.setOptions(cluesset);
 			return clue;
@@ -120,8 +120,9 @@ public class Puzzle
 		// subgrid
 		int subrow = row/3;
 		int subcol = col/3;
-		for(int i=subrow; i<subrow+3;i++){
-			for(int j=subcol;j<subrow+3;j++){
+		
+		for(int i=subrow*3; i<subrow+3;i++){
+			for(int j=subcol*3;j<subcol+3;j++){
 				cluesset.remove(this.grid[i][j]);
 			}
 		}
@@ -133,7 +134,7 @@ public class Puzzle
 	public class Clue{
 		
 		Integer index;
-		Set options;
+		Set<Integer> options;
 		
 		
 		
@@ -150,10 +151,10 @@ public class Puzzle
 		public void setIndex(int index) {
 			this.index = index;
 		}
-		public Set getOptions() {
+		public Set<Integer> getOptions() {
 			return options;
 		}
-		public void setOptions(Set options) {
+		public void setOptions(Set<Integer> options) {
 			this.options = options;
 		}
 
