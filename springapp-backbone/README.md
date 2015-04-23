@@ -15,4 +15,4 @@ Spring hateos for jpa repositories.
 http://localhost:8080/springapp/api
 
 Backbone js demo.
-http://localhost:8080/springapp/app/assets/pages/bootstrap.html
+http://localhost:8080/springapp/app/assets/pages/backbone.html
