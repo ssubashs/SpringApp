@@ -1,4 +1,4 @@
-package com.farmers.test;
+package com.local.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,7 +32,7 @@ public class TesteSignTrans {
 	@Autowired
 	private TesignTrnTrackerRepo esignRepo;
 	
-	@Test
+//	@Test
 	public void testRepo()
 	{
 		String policynum = "someno"; // changing the no. 

@@ -15,7 +15,8 @@
   		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
   		<slf4j.version>1.7.6</slf4j.version>
   		<aspectj.version>1.6.10</aspectj.version>
-  		<droolsVersion>6.0.0.Final</droolsVersion>  	
+  		<droolsVersion>6.0.0.Final</droolsVersion>  
+  		<activemq.version>5.11.1</activemq.version>	
   		<camel.version>2.15.2</camel.version>	
 	</properties>
 	
@@ -49,12 +50,34 @@
 			<version>${spring.version}</version>
 		</dependency>
  
+		 <dependency>
+		      <groupId>org.springframework</groupId>
+		      <artifactId>spring-jms</artifactId>
+		      <version>${spring.version}</version>
+		    </dependency>  
+		  
+		    <!-- ActiveMQ Artifacts -->
+		    <dependency>
+		      <groupId>org.apache.activemq</groupId>
+		      <artifactId>activemq-spring</artifactId>
+		      <version>${activemq.version}</version>
+		    </dependency>
+		    
+		     <dependency>
+		      <groupId>org.apache.activemq</groupId>
+		      <artifactId>activemq-camel</artifactId>
+		      <version>${activemq.version}</version>
+		    </dependency>
+ 
+ 
 		<!-- MySQL database driver -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.driver.version}</version>
 		</dependency>
+		
+		
 		
 		<!-- Spring Batch dependencies -->
 		<dependency>
@@ -68,12 +91,15 @@
 			<version>${spring.batch.version}</version>
 		</dependency>
  
+		
+		
 		<!-- Spring Batch unit test -->
 		<dependency>
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-test</artifactId>
 			<version>${spring.batch.version}</version>
 		</dependency>
+		
 		
 		<!--  hibernate dependencies -->
 		<dependency>
@@ -247,6 +273,12 @@
             <artifactId>camel-core</artifactId>
             <version>${camel.version}</version>
         </dependency>
+        
+        <dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
 		
 	</dependencies>
 	
