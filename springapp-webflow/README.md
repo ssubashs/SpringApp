@@ -1,18 +1,12 @@
 app-personal
 ============
-Features : 
+Features : Spring webflow demo
 
-Base workspace for spring mvc & spring data rest api. 
+Base workspace for spring webflow 
 H2 embedded database/ JPA configured for object modelling. 
-View -Thymeleaf/Freemarker/Jsp.
-Rest enabled repositories. 
+View -Thymeleaf/tiles/spring webflow.
+
 
 Demo pages: 
-Spring MVC+Thymeleaf
-http://localhost:8080/springapp/app/customer
-
-Spring hateos for jpa repositories. 
-http://localhost:8080/springapp/api
-
-Backbone js demo.
-http://localhost:8080/springapp/app/assets/pages/bootstrap.html
+Spring webflow
+http://localhost:8080/springapp-webflow/app/customer
