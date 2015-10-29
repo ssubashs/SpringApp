@@ -9,4 +9,4 @@ View -Thymeleaf/tiles/spring webflow.
 
 Demo pages: 
 Spring webflow
-http://localhost:8080/springapp-webflow/app/customer
+http://localhost:8080/springapp-webflow/app/customer/flow
